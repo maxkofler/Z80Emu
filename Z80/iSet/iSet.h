@@ -2,6 +2,7 @@
 #define __ISET_H__
 
 #include "../z80.h"
+#include <stdint.h>
 
 class ISet{
 

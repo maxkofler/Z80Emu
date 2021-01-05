@@ -2,6 +2,7 @@
 #define __INCDECADDSUB_H__
 
 #include "../../z80.h"
+#include <stdint.h>
 
 //Inherited from Z80 class to access flags
 

@@ -2,6 +2,7 @@
 #define __Z80_H__
 
 #include <string>
+#include <stdint.h>
 
 class Z80{
     
@@ -71,5 +72,5 @@ private:
     bool Cf;    //Carry flag
 };
 
-#include "z80.cpp"
+#include "Z80/z80.cpp"
 #endif

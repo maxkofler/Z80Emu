@@ -2,6 +2,7 @@
 #define __IMANAGER_H__
 
 #include <string>
+#include <stdint.h>
 
 class IManager{
 
