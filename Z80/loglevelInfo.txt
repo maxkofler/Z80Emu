@@ -1,0 +1,8 @@
+1   E   Errors
+2   V   Verbose
+3   W   Warnings
+4   I   Info
+5   I2  Deeper Info
+6   D   Debug
+7   D2  Deeper Debug (second class)
+8   D3  Deepest Debug (Reads/writes to memory, files...)

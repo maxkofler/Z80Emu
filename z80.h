@@ -1,10 +1,5 @@
 /*
     -----Z80-----
-
-    -loadProgram(string)
-        ->  path to program
-        !!  loads the program into the internal "memory" of the CPU
-        <-  the ammount of bytes loaded
 */
 
 #ifndef __Z80_H__
@@ -12,7 +7,6 @@
 
 #include <string>
 #include <stdint.h>
-#include <iomanip>
 
 #include "Z80/memoryManager/memoryManager.h"
 
@@ -21,10 +15,7 @@ class Z80{
 public:
     Z80(int);
 
-    uint16_t loadProgram(std::string);
-
-    uint8_t getMemory(uint16_t pos){return memoryManager->get(pos);}
-    uint16_t getMemoryX16(uint16_t pos){return memoryManager->getX16(pos);}
+    MemoryManager* memoryManager;
 
     void sSf(bool x){this->Sf = x;}
     void sZf(bool x){this->Zf = x;}
@@ -46,7 +37,6 @@ public:
 
 private:
     Log* log;
-    MemoryManager* memoryManager;
 
     //Main registers
     uint8_t rA;

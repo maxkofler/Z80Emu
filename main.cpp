@@ -2,10 +2,7 @@
 #include "Z80/log/log.h"
 
 int main(){
-    Z80 z80(6);
-    z80.loadProgram("prog.hex");
-    Log log(5);
-    log.log("Mem 0x1000 (8) = " + Log::toHexString(z80.getMemory(0x1000)));
-    log.log("Mem 0x1000 (16) = " + Log::toHexString(z80.getMemoryX16(0x1000)));
-
+    Z80 z80(Log::D3);
+    z80.memoryManager->loadProgFromFile("prog.hex", 0x1000);
+    z80.memoryManager->setROM(0x2000, 0x2010);
 }
