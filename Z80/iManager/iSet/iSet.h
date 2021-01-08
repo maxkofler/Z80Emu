@@ -1,7 +1,7 @@
 #ifndef __ISET_H__
 #define __ISET_H__
 
-#include "../z80.h"
+#include "../../../z80.h"
 #include <stdint.h>
 
 class ISet{

@@ -8,7 +8,12 @@
 #include <string>
 #include <stdint.h>
 
+class IManager;
+class MemoryManager;
+
 #include "Z80/memoryManager/memoryManager.h"
+#include "Z80/iManager/iManager.h"
+#include "Z80/log/log.h"
 
 class Z80{
     
@@ -16,6 +21,7 @@ public:
     Z80(int);
 
     MemoryManager* memoryManager;
+    IManager* iManager;
 
     void sSf(bool x){this->Sf = x;}
     void sZf(bool x){this->Zf = x;}

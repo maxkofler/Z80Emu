@@ -3,4 +3,5 @@
 Z80::Z80(int logLevel){
     this->log = new Log(logLevel);
     this->memoryManager = new MemoryManager(this->log);
+    this->iManager = new IManager(this, this->log);
 }
