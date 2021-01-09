@@ -1,13 +1,18 @@
 #ifndef __ISET_H__
 #define __ISET_H__
 
+class ISet;
+
 #include "../../../z80.h"
+#include "../../log/log.h"
+#include "MAINIS/mainIs.h"
+
 #include <stdint.h>
 
 class ISet{
 
 public:
-    ISet(Z80*);
+    ISet(Z80*, Log*);
 
     //To get how many bytes of operators this IS needs
     uint8_t getOPBytes(uint8_t);
@@ -20,9 +25,8 @@ public:
 
 private:
     Z80* z80;
-
+    Log* log;
+    MainIS* mainIS;
 };
-
-#include "iSet.cpp"
 
 #endif

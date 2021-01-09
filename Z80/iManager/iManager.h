@@ -1,8 +1,10 @@
 #ifndef __IMANAGER_H__
 #define __IMANAGER_H__
 
+#include <string>
 #include <stdint.h>
 
+class IManager;
 class Z80;
 
 #include "iSet/iSet.h"
@@ -16,13 +18,17 @@ public:
 
     uint8_t* fetchIS(uint16_t);
     void execIS();
+    void execIS(uint8_t*);
+    void finalizeIS(uint8_t*);
+
+    void logIS(uint8_t*);
 
 private:
-    uint8_t* curIS;
+    bool ISLoaded;
+    uint8_t opcode;
     ISet* iSet;
     Z80* z80;
     Log* log;
 };
 
-//#include "iManager.cpp"
 #endif

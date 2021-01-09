@@ -1,7 +1,9 @@
 #ifndef __INCDECADDSUB_H__
 #define __INCDECADDSUB_H__
 
-#include "../../z80.h"
+class IncDecAddSub;
+
+#include "../../../../z80.h"
 #include <stdint.h>
 
 //Inherited from Z80 class to access flags
@@ -18,13 +20,12 @@ public:
     uint16_t decX16(uint16_t);
 
     uint8_t add(uint8_t, uint8_t);
+    uint16_t addX16(uint16_t, uint16_t);
     
     uint8_t sub(uint8_t, uint8_t);
+    uint16_t subX16(uint16_t, uint16_t);
 
 private:
     Z80* z80;
 };
-
-#include "incdecaddsub.cpp"
-
 #endif

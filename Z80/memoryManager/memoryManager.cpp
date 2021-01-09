@@ -1,3 +1,4 @@
+#include "memoryManager.h"
 MemoryManager::MemoryManager(Log* log){
     this->memory = new uint8_t[__UINT16_MAX__];
     this->log = log;
@@ -32,10 +33,12 @@ uint16_t MemoryManager::loadProgFromFile(std::string path, uint16_t initpos){
 }
 
 uint8_t MemoryManager::get(uint16_t pos){
+    log->log("MemoryManager::get()", "Read " + Log::toHexString(pos) + " -> [" + Log::toHexString(this->memory[pos]) + "]", Log::D3);
     return this->memory[pos];
 }
 
 uint16_t MemoryManager::getX16(uint16_t pos){
+    log->log("MemoryManager::get()", "Read (16) " + Log::toHexString(pos) + " -> [" + Log::toHexString(this->memory[pos]) + "-" + Log::toHexString(this->memory[pos+1]) + "]", Log::D3);
     return (get(pos+1) << 8 ) | (get(pos) & 0xff);
 }
 

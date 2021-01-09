@@ -3,26 +3,49 @@
 IManager::IManager(Z80* z80, Log* log){
     this->z80 = z80;
     this->log = log;
-    this->iSet = new ISet(this->z80);
+    this->iSet = new ISet(this->z80, this->log);
 }
 
 uint8_t* IManager::fetchIS(uint16_t address){
-
-    //Check if the curIS is set
-    if (curIS != nullptr){
-        delete[] curIS;
+    if (this->ISLoaded){
+        log->logprg("IManager::fetchIS", "finalizeIS() was not called! Please call to clean up pointers!", Log::W);
     }
 
-    uint8_t opcode = this->z80->memoryManager->get(address);
+    this->opcode = this->z80->mM->get(address);
 
-    uint8_t operands = this->iSet->getOPBytes(opcode);
+    static uint8_t operands = this->iSet->getOPBytes(opcode);
+    log->log("IManager::fetchIS()", "Fetching " + std::to_string(operands) + " operands!", Log::D2);
 
-    this->curIS = new uint8_t[1+operands];
+    uint8_t* curIS = new uint8_t[operands+1];
+    this->ISLoaded = true;
+    static int arr[100];
+    curIS[0] = opcode;
 
     for (int i = 0; i < operands; i++){
-        curIS[i+1] = this->z80->memoryManager->get(address+1+i);
+        curIS[i+1] = this->z80->mM->get(address+1+i);
     }
 
     return curIS;
+}
 
+void IManager::execIS(){
+    //this->iSet->execIS(curIS);
+    this->z80->addCycles(this->iSet->getISCycles(this->opcode));
+}
+
+void IManager::execIS(uint8_t* is){
+    this->iSet->execIS(is);
+    this->z80->addCycles(this->iSet->getISCycles(is[0]));
+}
+
+void IManager::logIS(uint8_t* is){
+    std::string instruction = "(" + Log::toHexString(opcode) + ")";
+    for (int i = 1; i < sizeof(is); i++){
+        instruction += ";" + Log::toHexString(is[i]);
+    }
+    log->log("IManager::fetchIS()", "Current instruction: " + instruction, Log::I);
+}
+
+void IManager::finalizeIS(uint8_t* is){
+    delete[] is;
 }

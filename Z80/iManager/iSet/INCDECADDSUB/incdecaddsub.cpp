@@ -5,7 +5,7 @@ IncDecAddSub::IncDecAddSub(Z80* z80){
 }
 
 uint8_t IncDecAddSub::inc(uint8_t reg){
-
+    return 0;
 }
 uint16_t IncDecAddSub::incX16(uint16_t reg){
     //No registers affected
@@ -13,7 +13,7 @@ uint16_t IncDecAddSub::incX16(uint16_t reg){
 }
 
 uint8_t IncDecAddSub::dec(uint8_t reg){
-    
+    return 0;
 }
 uint16_t IncDecAddSub::decX16(uint16_t reg){
     //No registers affected
@@ -21,11 +21,17 @@ uint16_t IncDecAddSub::decX16(uint16_t reg){
 }
 
 uint8_t IncDecAddSub::add(uint8_t reg1, uint8_t reg2){
-
+    return 0;
+}
+uint16_t IncDecAddSub::addX16(uint16_t reg1, uint16_t reg2){
+    return 0;
 }
 
 uint8_t IncDecAddSub::sub(uint8_t reg1, uint8_t reg2){
-    
+    return 0;
+}
+uint16_t IncDecAddSub::subX16(uint16_t reg1, uint16_t reg2){
+    return 0;
 }
 
 
