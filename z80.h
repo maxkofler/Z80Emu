@@ -48,23 +48,23 @@ public:
     void DE(uint16_t);
     void HL(uint16_t);
 
-    void sSf(bool x){this->Sf = x;}
-    void sZf(bool x){this->Zf = x;}
-    void sF5(bool x){this->F5 = x;}
-    void sHf(bool x){this->Hf = x;}
-    void sF3(bool x){this->F3 = x;}
-    void sPVf(bool x){this->PVf = x;}
-    void sNf(bool x){this->Nf = x;}
-    void sCf(bool x){this->Cf = x;}
+    void SF(bool x){this->Sf = x;}
+    void ZF(bool x){this->Zf = x;}
+    void F5F(bool x){this->F5 = x;}
+    void HF(bool x){this->Hf = x;}
+    void F3F(bool x){this->F3 = x;}
+    void PVF(bool x){this->PVf = x;}
+    void NF(bool x){this->Nf = x;}
+    void CF(bool x){this->Cf = x;}
 
-    bool gSf(){return this->Sf;}
-    bool gZf(){return this->Zf;}
-    bool gF5(){return this->F5;}
-    bool gHf(){return this->Hf;}
-    bool gF3(){return this->F3;}
-    bool gPVf(){return this->PVf;}
-    bool gNf(){return this->Nf;}
-    bool gCf(){return this->Cf;}
+    bool SF(){return this->Sf;}
+    bool ZF(){return this->Zf;}
+    bool F5F(){return this->F5;}
+    bool HF(){return this->Hf;}
+    bool F3F(){return this->F3;}
+    bool PVF(){return this->PVf;}
+    bool NF(){return this->Nf;}
+    bool CF(){return this->Cf;}
 
     uint64_t addCycles(uint64_t c){this->cycles += c; return this->cycles;}
 
