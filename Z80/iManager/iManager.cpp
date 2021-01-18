@@ -18,7 +18,6 @@ uint8_t* IManager::fetchIS(uint16_t address){
 
     uint8_t* curIS = new uint8_t[operands+1];
     this->ISLoaded = true;
-    static int arr[100];
     curIS[0] = opcode;
 
     for (int i = 0; i < operands; i++){
@@ -39,8 +38,9 @@ void IManager::execIS(uint8_t* is){
 }
 
 void IManager::logIS(uint8_t* is){
+    uint8_t opcode = is[0];
     std::string instruction = "(" + Log::toHexString(opcode) + ")";
-    for (int i = 1; i < sizeof(is); i++){
+    for (int i = 1; i < this->iSet->getOPBytes(opcode); i++){
         instruction += ";" + Log::toHexString(is[i]);
     }
     log->log("IManager::fetchIS()", "Current instruction: " + instruction, Log::I);

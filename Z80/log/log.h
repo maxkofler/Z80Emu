@@ -63,7 +63,7 @@ public:
     }
 
     void logUnimplemented(uint8_t op){
-        this->log("unimplemented", "Opcode " + Log::toHexString(op) + " is not implemented already!", Log::E);
+        this->log("unimplemented", "Opcode " + Log::toHexString(op) + " is not implemented yet!", Log::E);
     }
 
 
