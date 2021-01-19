@@ -5,6 +5,7 @@ class MainIS;
 
 #include "../../../../z80.h"
 #include "../../../log/log.h"
+#include "../rotate/rotate.h"
 #include "../INCDECADDSUB/incdecaddsub.h"
 #include <stdint.h>
 
@@ -16,6 +17,7 @@ public:
 
 private:
     IncDecAddSub* idas;
+    Rotate* rot;
     Z80* z;
     Log* log;
 
