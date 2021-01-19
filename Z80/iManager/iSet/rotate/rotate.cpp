@@ -11,3 +11,16 @@ uint8_t Rotate::RLC(uint8_t reg){
     this->z80->CF(reg >> 7);
     return reg << 1;
 }
+
+uint8_t Rotate::RL(uint8_t reg){
+    return 0;
+}
+
+
+uint8_t Rotate::RRC(uint8_t reg){
+    return 0;
+}
+
+uint8_t Rotate::RR(uint8_t reg){
+    return 0;
+}

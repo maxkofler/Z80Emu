@@ -4,7 +4,6 @@ ISet::ISet(Z80* z80, Log* log){
     this->z80 = z80;
     this->log = log;
     this->mainIS = new MainIS(this->z80, this->log);
-    this->rotate = new Rotate(this->z80);
 
     this->opBytes = new uint8_t[this->opsImplemented] {0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0};
 }

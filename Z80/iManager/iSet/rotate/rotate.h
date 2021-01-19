@@ -1,7 +1,9 @@
 #ifndef __ROTATE_H__
 #define __ROTATE_H__
 
-#include "../../../z80.h"
+class Rotate;
+
+#include "../../../../z80.h"
 
 class Rotate{
 public:
