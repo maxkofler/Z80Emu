@@ -63,11 +63,28 @@ void MainIS::exec(uint8_t* is){
         case 0x28:  log->logUnimplemented(op);                                                          break;  //JR Z, *          NOT IMPLEMENTED YET!
         case 0x29:  z->HL(idas->addX16(z->HL(), z->HL()));                                              break;  //ADD HL, HL
         case 0x2A:  z->HL(z->mM->getX16(z->getX16(is[1], is[2])));                                      break;  //LD HL, (**)
-        case 0x2B:  z->DE(idas->decX16(z->DE()));                                                       break;  //DEC DE
-        case 0x2C:  z->E(idas->inc(z->E()));                                                            break;  //INC E
-        case 0x2D:  z->E(idas->dec(z->E()));                                                            break;  //DEC E
-        case 0x2E:  z->E(is[1]);                                                                        break;  //LD E, *
+        case 0x2B:  z->HL(idas->decX16(z->HL()));                                                       break;  //DEC HL
+        case 0x2C:  z->L(idas->inc(z->L()));                                                            break;  //INC L
+        case 0x2D:  z->L(idas->dec(z->L()));                                                            break;  //DEC L
+        case 0x2E:  z->L(is[1]);                                                                        break;  //LD L, *
         case 0x2F:  log->logUnimplemented(op);                                                          break;  //CPL              NOT IMPLEMENTED YET!
+
+        case 0x30:  log->logUnimplemented(op);                                                          break;  //JR NC, *         NOT IMPLEMENTED YET!
+        case 0x31:  z->SP(z->getX16(is[1], is[2]));                                                     break;  //LD SP, **
+        case 0x32:  z->mM->set(z->getX16(is[1], is[2]), z->A());                                        break;  //LD (**), A
+        case 0x33:  z->SP(idas->incX16(z->SP()));                                                       break;  //INC SP
+        case 0x34:  log->logUnimplemented(op);                                                          break;  //INC (HL)         NIY!
+        case 0x35:  log->logUnimplemented(op);                                                          break;  //DEC (HL)         NIY!
+        case 0x36:  z->mM->set(z->HL(), is[1]);                                                         break;  //LD (HL), *
+        case 0x37:  log->logUnimplemented(op);                                                          break;  //SCF              NIY!
+        case 0x38:  log->logUnimplemented(op);                                                          break;  //JR C, *          NIY!
+        case 0x39:  z->HL(idas->addX16(z->HL(), z->SP()));                                              break;  //ADD HL, SP
+        case 0x3A:  z->A(z->mM->get(z->getX16(is[1], is[2])));                                          break;  //LD A, (**)
+        case 0x3B:  z->SP(idas->decX16(z->SP()));                                                       break;  //DEC SP
+        case 0x3C:  z->A(idas->inc(z->A()));                                                            break;  //INC A
+        case 0x3D:  z->A(idas->dec(z->A()));                                                            break;  //DEC A
+        case 0x3E:  z->A(is[1]);                                                                        break;  //LD A, *
+        case 0x3F:  z->CF(!z->CF()); z->HF(!z->HF());                                                   break;  //CCF
         
         
         
