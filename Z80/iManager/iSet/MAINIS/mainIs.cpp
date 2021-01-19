@@ -32,8 +32,32 @@ void MainIS::exec(uint8_t* is){
         case 0x0C:  z->C(idas->inc(z->C()));                                                            break;  //INC C
         case 0x0D:  z->C(idas->dec(z->C()));                                                            break;  //DEC C
         case 0x0E:  z->C(is[1]);                                                                        break;  //LD C, *
-        case 0x0F:  log->logUnimplemented(op);                                                          break;  //RRCA
+        case 0x0F:  log->logUnimplemented(op);                                                          break;  //RRCA              NOT IMPLEMENTED YET!
 
+        case 0x10:  log->logUnimplemented(op);                                                          break;  //DJNZ *            NOT IMPLEMENTED YET!
+        case 0x11:  z->DE(z->getX16(is[1], is[2]));                                                     break;  //LD DE, **
+        case 0x12:  z->mM->set(z->DE(), z->A());                                                        break;  //LC (DE), A
+        case 0x13:  z->DE(idas->incX16(z->DE()));                                                       break;  //INC DE
+        case 0x14:  z->D(idas->inc(z->D()));                                                            break;  //INC D
+        case 0x15:  z->D(idas->dec(z->D()));                                                            break;  //DEC D
+        case 0x16:  z->D(is[1]);                                                                        break;  //LD D, *
+        case 0x17:  log->logUnimplemented(op);                                                          break;  //RLCA              NOT IMPLEMENTED YET!
+        case 0x18:  log->logUnimplemented(op);                                                          break;  //EX AF, AF'        NOT IMPLEMENTED YET!
+        case 0x19:  z->HL(idas->addX16(z->HL(), z->DE()));                                              break;  //ADD HL, DE
+        case 0x1A:  z->A(z->mM->get(z->DE()));                                                          break;  //LD A, (DE)
+        case 0x1B:  z->DE(idas->decX16(z->DE()));                                                       break;  //DEC DE
+        case 0x1C:  z->E(idas->inc(z->E()));                                                            break;  //INC E
+        case 0x1D:  z->E(idas->dec(z->E()));                                                            break;  //DEC E
+        case 0x1E:  z->E(is[1]);                                                                        break;  //LD E, *
+        case 0x1F:  log->logUnimplemented(op);                                                          break;  //RRA              NOT IMPLEMENTED YET!
+        
+        
+        
+        
+        
+        
+        
+        
         case 0x67:  z->HALT(true);                                                                      break;  //HALT
 
         default:    log->logUnimplemented(op);                                                          break;  //Everything unimplemented
