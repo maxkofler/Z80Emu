@@ -72,6 +72,9 @@ public:
     uint16_t PC(){return this->rPC;}
     void PC(uint16_t v){this->rPC = v;}
 
+    uint16_t SP(){return this->rPC;}
+    void SP(uint16_t v){this->rPC = v;}
+
     uint64_t addCycles(uint64_t c){this->cycles += c; return this->cycles;}
 
     uint16_t getX16(uint8_t, uint8_t);
@@ -105,9 +108,9 @@ private:
     uint8_t rR;
 
     //Index registers
-    uint16_t IX;
-    uint16_t IY;
-    uint16_t SP;
+    uint16_t rIX;
+    uint16_t rIY;
+    uint16_t rSP;
 
     //Program Counter
     uint16_t rPC;
