@@ -6,6 +6,7 @@ class ISet;
 #include "../../../z80.h"
 #include "../../log/log.h"
 #include "MAINIS/mainIs.h"
+#include "ROTATE/rotate.h"
 
 #include <stdint.h>
 
@@ -27,6 +28,7 @@ private:
     Z80* z80;
     Log* log;
     MainIS* mainIS;
+    Rotate* rotate;
 
     const uint16_t opsImplemented = 16;
     uint8_t *opBytes;
