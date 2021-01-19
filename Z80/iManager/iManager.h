@@ -16,8 +16,7 @@ class IManager{
 public:
     IManager(Z80*, Log*);
 
-    uint8_t* fetchIS(uint16_t);
-    void execIS();
+    uint8_t* fetchIS();
     void execIS(uint8_t*);
     void finalizeIS(uint8_t*);
 

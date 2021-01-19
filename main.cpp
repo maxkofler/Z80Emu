@@ -16,7 +16,7 @@ int main(){
 
     uint8_t* is;
 
-    uint16_t PC = 0x1000;
+    z80.PC(0x1000);
 
     while (run){
         cout << ">";
@@ -24,17 +24,23 @@ int main(){
 
         if (command == "is"){
 
-            is = z80.iManager->fetchIS(PC); 
-            z80.iManager->logIS(is);
-            z80.iManager->execIS(is);   
-            z80.logReg();
-            PC++;
+            if (!z80.HALT()){
+                is = z80.iManager->fetchIS(); 
+                z80.iManager->logIS(is);
+                z80.iManager->execIS(is);   
+                z80.logReg();
+                z80.iManager->finalizeIS(is);
+            }else{
+                cout << "Processor is in halt state! Type PC to enter new start address!" << endl;
+            }
+            
 
         }else if (command == "PC"){
-            cout << "PC=";
+            cout << "PC(hex)=";
             cin >> command;
-            PC = stoul(command, nullptr, 16);
-            cout << "new PC = " << Log::toHexString(PC) << endl;
+            z80.PC(stoul(command, nullptr, 16));
+            z80.HALT(false);
+            cout << "new PC = " << Log::toHexString(z80.PC()) << endl;
         }
         
         

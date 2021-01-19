@@ -27,6 +27,9 @@ private:
     Z80* z80;
     Log* log;
     MainIS* mainIS;
+
+    const uint16_t opsImplemented = 16;
+    uint8_t *opBytes;
 };
 
 #endif

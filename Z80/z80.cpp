@@ -6,6 +6,7 @@ Z80::Z80(int logLevel){
     this->iManager = new IManager(this, this->log);
 }
 
+
 uint16_t Z80::getX16(uint8_t h, uint8_t l){
     return (h << 8) | (l & 0xff);
 }

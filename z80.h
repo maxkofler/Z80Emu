@@ -66,6 +66,12 @@ public:
     bool NF(){return this->Nf;}
     bool CF(){return this->Cf;}
 
+    void HALT(bool v){this->isHalt = v;}
+    bool HALT(){return this->isHalt;}
+
+    uint16_t PC(){return this->rPC;}
+    void PC(uint16_t v){this->rPC = v;}
+
     uint64_t addCycles(uint64_t c){this->cycles += c; return this->cycles;}
 
     uint16_t getX16(uint8_t, uint8_t);
@@ -104,7 +110,7 @@ private:
     uint16_t SP;
 
     //Program Counter
-    uint16_t PC;
+    uint16_t rPC;
 
     //Flags
     bool Sf;    //Sign flag
@@ -118,5 +124,8 @@ private:
 
     //Counter for CPU cycles
     uint64_t cycles;
+
+    //Boolean for expressing HALT state
+    bool isHalt;
 };
 #endif

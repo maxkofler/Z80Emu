@@ -4,11 +4,18 @@ ISet::ISet(Z80* z80, Log* log){
     this->z80 = z80;
     this->log = log;
     this->mainIS = new MainIS(this->z80, this->log);
+
+    this->opBytes = new uint8_t[this->opsImplemented] {0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0};
 }
 
 uint8_t ISet::getOPBytes(uint8_t opcode){
-    uint8_t opBytes[4] = {0, 2, 0, 0};
-    return opBytes[opcode];
+    if (opcode <= this->opsImplemented){
+        return this->opBytes[opcode];
+    }else{
+        log->log("ISet-getOPBytes", "Current opcode not implemented, returning 0 operands for safety!", Log::W);
+        return 0;
+    }
+    
 }
 
 void ISet::execIS(uint8_t* is){
