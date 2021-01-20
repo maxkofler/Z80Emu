@@ -7,6 +7,7 @@ class BitIS;
 #include "../../../../z80.h"
 
 #include "../rotate/rotate.h"
+#include "../bit/bit.h"
 
 class BitIS{
 public:
@@ -21,6 +22,7 @@ private:
     Log* log;
 
     Rotate* rot;
+    Bit* bit;
 };
 
 #endif

@@ -44,3 +44,17 @@ uint8_t Rotate::RR(uint8_t reg){
     this->z80->CF(C);
     return nreg;
 }
+
+uint8_t     Rotate::SRA     (uint8_t reg){
+    return 0;
+}
+uint8_t     Rotate::SRL     (uint8_t reg){
+    return 0;
+}
+
+uint8_t     Rotate::SLA     (uint8_t reg){
+    return 0;
+}
+uint8_t     Rotate::SLL     (uint8_t reg){
+    return 0;
+}
