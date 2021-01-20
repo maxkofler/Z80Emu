@@ -241,6 +241,24 @@ void MainIS::exec(uint8_t* is){
         case 0xCD:  z->SP(cpctl->call(true, z->getX16(is[1], is[2])));                                  break;  //CALL **
         case 0xCE:  z->A(idas->adc(z->A(), is[1]));                                                     break;  //ADC A, *
         case 0xCF:  cpctl->rst(0x08);                                                                   break;  //RST 08h
+
+        case 0xD0:  z->SP(cpctl->ret(!z->CF()));                                                        break;  //RET NC
+        case 0xD1:  z->DE(cpctl->pop());                                                                break;  //POP DE
+        case 0xD2:  z->SP(cpctl->jp(!z->CF(), z->getX16(is[1], is[2])));                                break;  //JP NC, **
+        case 0xD3:  log->logUnimplemented(op);                                                          break;  //OUT (*), A
+        case 0xD4:  z->SP(cpctl->call(!z->CF(), z->getX16(is[1], is[2])));                              break;  //CALL NC, **
+        case 0xD5:  cpctl->push(z->DE());                                                               break;  //PUSH DE
+        case 0xD6:  z->A(idas->sub(z->A(), is[1]));                                                     break;  //SUB *
+        case 0xD7:  cpctl->rst(0x10);                                                                   break;  //RST 10h
+        case 0xD8:  z->SP(cpctl->ret(z->CF()));                                                         break;  //RET C
+        case 0xD9:  cpctl->exx();                                                                       break;  //EXX
+        case 0xDA:  z->SP(cpctl->jp(z->CF(), z->getX16(is[1], is[2])));                                 break;  //JP C, **
+        case 0xDB:  log->logUnimplemented(op);                                                          break;  //IN A, (*)
+        case 0xDC:  z->SP(cpctl->call(z->CF(), z->getX16(is[1], is[2])));                               break;  //CALL C, **
+        //   0xDD:  ON THIS POSITION THE SWITCH TO THE IX INSTRUCTIONS HAPPENS!!!
+        case 0xDE:  z->A(idas->sbc(z->A(), is[1]));                                                     break;  //SBC A, *
+        case 0xDF:  cpctl->rst(0x18);                                                                   break;  //RST 18h
+
         
         default:    log->logUnimplemented(op);                                                          break;  //Everything unimplemented
     };
