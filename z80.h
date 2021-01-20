@@ -79,7 +79,7 @@ public:
 
     uint16_t getX16(uint8_t, uint8_t);
 
-    void logReg();
+    void logState();
 
 private:
     Log* log;

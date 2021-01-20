@@ -14,7 +14,7 @@ uint8_t* IManager::fetchIS(){
     this->opcode = this->z80->mM->get(z80->PC());
     z80->PC(z80->PC()+1);
 
-    static uint8_t operands = this->iSet->getOPBytes(opcode);
+    uint8_t operands = this->iSet->getOPBytes(opcode);
     log->log("IManager::fetchIS()", "Fetching " + std::to_string(operands) + " operands!", Log::D2);
 
     uint8_t* curIS = new uint8_t[operands+1];

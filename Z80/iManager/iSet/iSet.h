@@ -28,7 +28,7 @@ private:
     Log* log;
     MainIS* mainIS;
 
-    const uint16_t opsImplemented = 16;
+    uint16_t opsImplemented;
     uint8_t *opBytes;
 };
 

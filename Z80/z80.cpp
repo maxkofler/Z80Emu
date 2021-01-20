@@ -26,12 +26,13 @@ void Z80::HL(uint16_t v){
     this->rL = v >> 8;      //HIGH
 }
 
-void Z80::logReg(){
+void Z80::logState(){
     using namespace std;
     cout << endl;
-    cout << "A=" << Log::toHexString(rA) << endl;
-    cout << "B=" << Log::toHexString(rB) << " C=" << Log::toHexString(rC) << endl;
-    cout << "D=" << Log::toHexString(rD) << " E=" << Log::toHexString(rE) << endl;
-    cout << "H=" << Log::toHexString(rH) << " L=" << Log::toHexString(rL) << endl;
+    cout << "A=" << Log::toHexString(rA) << "\t";
+    cout << "S=" << Sf << " Z=" << Zf << " H=" << Hf << " PV=" << PVf << " N=" << Nf << " C=" << Cf << endl;
+    cout << "B=" << Log::toHexString(rB) << "\t C=" << Log::toHexString(rC) << endl;
+    cout << "D=" << Log::toHexString(rD) << "\t E=" << Log::toHexString(rE) << endl;
+    cout << "H=" << Log::toHexString(rH) << "\t L=" << Log::toHexString(rL) << endl;
     cout << endl;
 }
