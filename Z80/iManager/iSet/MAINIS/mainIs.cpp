@@ -119,9 +119,25 @@ void MainIS::exec(uint8_t* is){
         case 0x5D:  z->E(z->L());                                                                       break;  //LD E, L
         case 0x5E:  z->E(z->mM->get(z->HL()));                                                          break;  //LD E, (HL)
         case 0x5F:  z->E(z->A());                                                                       break;  //LD E, A
+
+        case 0x60:  z->D(z->B());                                                                       break;  //LD D, B
+        case 0x61:  z->D(z->C());                                                                       break;  //LD D, C
+        case 0x62:  z->D(z->D());                                                                       break;  //LD D, D
+        case 0x63:  z->D(z->E());                                                                       break;  //LD D, E
+        case 0x64:  z->D(z->H());                                                                       break;  //LD D, H
+        case 0x65:  z->D(z->L());                                                                       break;  //LD D, L
+        case 0x66:  z->D(z->mM->get(z->HL()));                                                          break;  //LD D, (HL)
+        case 0x67:  z->H(z->A());                                                                         break;  //LD D, A
+        case 0x68:  z->E(z->B());                                                                       break;  //LD E, B
+        case 0x69:  z->E(z->C());                                                                       break;  //LD E, C
+        case 0x6A:  z->E(z->D());                                                                       break;  //LD E, D
+        case 0x6B:  z->E(z->E());                                                                       break;  //LD E, E
+        case 0x6C:  z->E(z->H());                                                                       break;  //LD E, H
+        case 0x6D:  z->E(z->L());                                                                       break;  //LD E, L
+        case 0x6E:  z->E(z->mM->get(z->HL()));                                                          break;  //LD E, (HL)
+        case 0x6F:  z->E(z->A());                                                                       break;  //LD E, A
         
-        
-        case 0x67:  z->HALT(true);                                                                      break;  //HALT
+        case 0x76:  z->HALT(true);                                                                      break;  //HALT
         default:    log->logUnimplemented(op);                                                          break;  //Everything unimplemented
     };
 }
