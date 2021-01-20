@@ -45,8 +45,21 @@ void BitIS::exec(uint8_t op){
         case 0x1F:  z->A(rot->RR(z->A()));                                                              break;  //RR A
 
         case 0x20:  z->B(rot->SLA(z->B()));                                                             break;  //SLA B
-        //
+        case 0x21:  z->C(rot->SLA(z->C()));                                                             break;  //SLA C
+        case 0x22:  z->D(rot->SLA(z->D()));                                                             break;  //SLA D
+        case 0x23:  z->E(rot->SLA(z->E()));                                                             break;  //SLA E
+        case 0x24:  z->H(rot->SLA(z->H()));                                                             break;  //SLA H
+        case 0x25:  z->L(rot->SLA(z->L()));                                                             break;  //SLA L
+        case 0x26:  z->mM->set(z->HL(), rot->SLA(z->mM->get(z->HL())));                                 break;  //SLA (HL)
+        case 0x27:  z->A(rot->SRA(z->A()));                                                             break;  //SLA A
         case 0x28:  z->B(rot->SRA(z->B()));                                                             break;  //SRA B
+        case 0x29:  z->C(rot->SRA(z->C()));                                                             break;  //SRA C
+        case 0x2A:  z->D(rot->SRA(z->D()));                                                             break;  //SRA D
+        case 0x2B:  z->E(rot->SRA(z->E()));                                                             break;  //SRA E
+        case 0x2C:  z->H(rot->SRA(z->H()));                                                             break;  //SRA H
+        case 0x2D:  z->L(rot->SRA(z->L()));                                                             break;  //SRA L
+        case 0x2E:  z->mM->set(z->HL(), rot->SRA(z->mM->get(z->HL())));                                 break;  //SRA (HL)
+        case 0x2F:  z->A(rot->SRA(z->A()));                                                             break;  //SRA A
 
         case 0x30:  z->B(rot->SLL(z->B()));                                                             break;  //SLL B
         //
