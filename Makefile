@@ -7,10 +7,11 @@ all: builddir
 	g++ -o build/memoryManager.o -c Z80/memoryManager/memoryManager.cpp
 	g++ -o build/iSet.o -c Z80/iManager/iSet/iSet.cpp
 	g++ -o build/rotate.o -c Z80/iManager/iSet/rotate/rotate.cpp
+	g++ -o build/arithmetic.o -c Z80/iManager/iSet/arithmetic/arithmetic.cpp
 
 	g++ -o build/main.o -c main.cpp
 
-	(cd build && g++ -o ../z80.out main.o z80.o iManager.o iSet.o incdecaddsub.o memoryManager.o mainIs.o rotate.o)
+	(cd build && g++ -o ../z80.out main.o z80.o iManager.o iSet.o incdecaddsub.o memoryManager.o mainIs.o rotate.o arithmetic.o)
 
 
 builddir:
