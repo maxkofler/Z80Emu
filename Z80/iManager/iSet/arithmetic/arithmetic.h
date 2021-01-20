@@ -14,6 +14,8 @@ public:
 
     uint8_t XOR(uint8_t, uint8_t);
 
+    void CP(uint8_t, uint8_t);
+
 private:
     Z80* z80;
 };

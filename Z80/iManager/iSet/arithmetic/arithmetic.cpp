@@ -15,3 +15,7 @@ uint8_t Arithmetic::OR(uint8_t reg1, uint8_t reg2){
 uint8_t Arithmetic::XOR(uint8_t reg1, uint8_t reg2){
     return 0;
 }
+
+void Arithmetic::CP(uint8_t reg1, uint8_t reg2){
+    
+}
