@@ -28,8 +28,21 @@ void BitIS::exec(uint8_t op){
         case 0x0F:  z->A(rot->RRC(z->B()));                                                             break;  //RRC A
 
         case 0x10:  z->B(rot->RL(z->B()));                                                              break;  //RL B
-        //
+        case 0x11:  z->C(rot->RL(z->C()));                                                              break;  //RL C
+        case 0x12:  z->D(rot->RL(z->D()));                                                              break;  //RL D
+        case 0x13:  z->E(rot->RL(z->E()));                                                              break;  //RL E
+        case 0x14:  z->H(rot->RL(z->H()));                                                              break;  //RL H
+        case 0x15:  z->L(rot->RL(z->L()));                                                              break;  //RL L 
+        case 0x16:  z->mM->set(z->HL(), rot->RL(z->mM->get(z->HL())));                                  break;  //RL (HL)
+        case 0x17:  z->A(rot->RL(z->A()));                                                              break;  //RL A
         case 0x18:  z->B(rot->RR(z->B()));                                                              break;  //RR B
+        case 0x19:  z->C(rot->RR(z->C()));                                                              break;  //RR C
+        case 0x1A:  z->D(rot->RR(z->D()));                                                              break;  //RR D
+        case 0x1B:  z->E(rot->RR(z->E()));                                                              break;  //RR E
+        case 0x1C:  z->H(rot->RR(z->H()));                                                              break;  //RR H
+        case 0x1D:  z->L(rot->RR(z->L()));                                                              break;  //RR L
+        case 0x1E:  z->mM->set(z->HL(), rot->RR(z->mM->get(z->HL())));                                  break;  //RR (HL)
+        case 0x1F:  z->A(rot->RR(z->A()));                                                              break;  //RR A
 
         case 0x20:  z->B(rot->SLA(z->B()));                                                             break;  //SLA B
         //
