@@ -5,6 +5,7 @@ MainIS::MainIS(Z80* z80, Log* log){
     this->log = log;
     this->idas = new IncDecAddSub(this->z);
     this->rot = new Rotate(this->z);
+    this->arit = new Arithmetic(this->z);
 }
 
 uint8_t MainIS::getCycles(uint8_t op){
@@ -153,6 +154,8 @@ void MainIS::exec(uint8_t* is){
         case 0x7D:  z->A(z->L());                                                                       break;  //LD A, L
         case 0x7E:  z->A(z->mM->get(z->HL()));                                                          break;  //LD A, (HL)
         case 0x7F:  z->A(z->B());                                                                       break;  //LD A, A
+
+        
 
         default:    log->logUnimplemented(op);                                                          break;  //Everything unimplemented
     };
