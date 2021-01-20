@@ -80,7 +80,71 @@ void BitIS::exec(uint8_t op){
         
         case 0x40:  bit->bit(0, z->B());                                                                break;  //BIT 0, B
         case 0x41:  bit->bit(0, z->C());                                                                break;  //BIT 0, C
-        //...
+        case 0x42:  bit->bit(0, z->D());                                                                break;  //BIT 0, D
+        case 0x43:  bit->bit(0, z->E());                                                                break;  //BIT 0, E
+        case 0x44:  bit->bit(0, z->H());                                                                break;  //BIT 0, H
+        case 0x45:  bit->bit(0, z->L());                                                                break;  //BIT 0, L
+        case 0x46:  bit->bit(0, z->mM->get(z->HL()));                                                   break;  //BIT 0, (HL)
+        case 0x47:  bit->bit(0, z->A());                                                                break;  //BIT 0, A
+        case 0x48:  bit->bit(1, z->B());                                                                break;  //BIT 1, B
+        case 0x49:  bit->bit(1, z->C());                                                                break;  //BIT 1, C
+        case 0x4A:  bit->bit(1, z->D());                                                                break;  //BIT 1, D
+        case 0x4B:  bit->bit(1, z->E());                                                                break;  //BIT 1, E
+        case 0x4C:  bit->bit(1, z->H());                                                                break;  //BIT 1, H
+        case 0x4D:  bit->bit(1, z->L());                                                                break;  //BIT 1, L
+        case 0x4E:  bit->bit(1, z->mM->get(z->HL()));                                                   break;  //BIT 1, (HL)
+        case 0x4F:  bit->bit(1, z->A());                                                                break;  //BIT 1, A
+
+        case 0x50:  bit->bit(2, z->B());                                                                break;  //BIT 2, B
+        case 0x51:  bit->bit(2, z->C());                                                                break;  //BIT 2, C
+        case 0x52:  bit->bit(2, z->D());                                                                break;  //BIT 2, D
+        case 0x53:  bit->bit(2, z->E());                                                                break;  //BIT 2, E
+        case 0x54:  bit->bit(2, z->H());                                                                break;  //BIT 2, H
+        case 0x55:  bit->bit(2, z->L());                                                                break;  //BIT 2, L
+        case 0x56:  bit->bit(2, z->mM->get(z->HL()));                                                   break;  //BIT 2, (HL)
+        case 0x57:  bit->bit(2, z->A());                                                                break;  //BIT 2, A
+        case 0x58:  bit->bit(3, z->B());                                                                break;  //BIT 3, B
+        case 0x59:  bit->bit(3, z->C());                                                                break;  //BIT 3, C
+        case 0x5A:  bit->bit(3, z->D());                                                                break;  //BIT 3, D
+        case 0x5B:  bit->bit(3, z->E());                                                                break;  //BIT 3, E
+        case 0x5C:  bit->bit(3, z->H());                                                                break;  //BIT 3, H
+        case 0x5D:  bit->bit(3, z->L());                                                                break;  //BIT 3, L
+        case 0x5E:  bit->bit(3, z->mM->get(z->HL()));                                                   break;  //BIT 3, (HL)
+        case 0x5F:  bit->bit(3, z->A());                                                                break;  //BIT 3, A
+
+        case 0x60:  bit->bit(4, z->B());                                                                break;  //BIT 4, B
+        case 0x61:  bit->bit(4, z->C());                                                                break;  //BIT 4, C
+        case 0x62:  bit->bit(4, z->D());                                                                break;  //BIT 4, D
+        case 0x63:  bit->bit(4, z->E());                                                                break;  //BIT 4, E
+        case 0x64:  bit->bit(4, z->H());                                                                break;  //BIT 4, H
+        case 0x65:  bit->bit(4, z->L());                                                                break;  //BIT 4, L
+        case 0x66:  bit->bit(4, z->mM->get(z->HL()));                                                   break;  //BIT 4, (HL)
+        case 0x67:  bit->bit(4, z->A());                                                                break;  //BIT 4, A
+        case 0x68:  bit->bit(4, z->B());                                                                break;  //BIT 5, B
+        case 0x69:  bit->bit(5, z->C());                                                                break;  //BIT 5, C
+        case 0x6A:  bit->bit(5, z->D());                                                                break;  //BIT 5, D
+        case 0x6B:  bit->bit(5, z->E());                                                                break;  //BIT 5, E
+        case 0x6C:  bit->bit(5, z->H());                                                                break;  //BIT 5, H
+        case 0x6D:  bit->bit(5, z->L());                                                                break;  //BIT 5, L
+        case 0x6E:  bit->bit(5, z->mM->get(z->HL()));                                                   break;  //BIT 5, (HL)
+        case 0x6F:  bit->bit(5, z->A());                                                                break;  //BIT 5, A
+
+        case 0x70:  bit->bit(6, z->B());                                                                break;  //BIT 6, B
+        case 0x71:  bit->bit(6, z->C());                                                                break;  //BIT 6, C
+        case 0x72:  bit->bit(6, z->D());                                                                break;  //BIT 6, D
+        case 0x73:  bit->bit(6, z->E());                                                                break;  //BIT 6, E
+        case 0x74:  bit->bit(6, z->H());                                                                break;  //BIT 6, H
+        case 0x75:  bit->bit(6, z->L());                                                                break;  //BIT 6, L
+        case 0x76:  bit->bit(6, z->mM->get(z->HL()));                                                   break;  //BIT 6, (HL)
+        case 0x77:  bit->bit(6, z->A());                                                                break;  //BIT 6, A
+        case 0x78:  bit->bit(7, z->B());                                                                break;  //BIT 7, B
+        case 0x79:  bit->bit(7, z->C());                                                                break;  //BIT 7, C
+        case 0x7A:  bit->bit(7, z->D());                                                                break;  //BIT 7, D
+        case 0x7B:  bit->bit(7, z->E());                                                                break;  //BIT 7, E
+        case 0x7C:  bit->bit(7, z->H());                                                                break;  //BIT 7, H
+        case 0x7D:  bit->bit(7, z->L());                                                                break;  //BIT 7, L
+        case 0x7E:  bit->bit(7, z->mM->get(z->HL()));                                                   break;  //BIT 7, (HL)
+        case 0x7F:  bit->bit(7, z->A());                                                                break;  //BIT 7, A
 
         case 0x80:  z->B(bit->res(0, z->B()));                                                          break;  //RES 0, B
         case 0x81:  z->C(bit->res(0, z->C()));                                                          break;  //RES 0, B
