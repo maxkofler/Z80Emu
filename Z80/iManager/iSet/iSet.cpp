@@ -4,6 +4,7 @@ ISet::ISet(Z80* z80, Log* log){
     this->z80 = z80;
     this->log = log;
     this->mainIS = new MainIS(this->z80, this->log);
+    this->bitIS = new BitIS(this->z80, this->log);
 
 
     this->opsImplemented = 64;

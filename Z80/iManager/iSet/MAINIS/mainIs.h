@@ -7,7 +7,7 @@ class MainIS;
 #include "../../../log/log.h"
 #include "../rotate/rotate.h"
 #include "../arithmetic/arithmetic.h"
-#include "../INCDECADDSUB/incdecaddsub.h"
+#include "../incdecaddsub/incdecaddsub.h"
 #include <stdint.h>
 
 class MainIS{
