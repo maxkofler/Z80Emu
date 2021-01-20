@@ -5,6 +5,7 @@ MainIS::MainIS(Z80* z80, Log* log){
     this->log = log;
     this->idas = new IncDecAddSub(this->z);
     this->rot = new Rotate(this->z);
+    this->arit = new Arithmetic(this->z);
 }
 
 uint8_t MainIS::getCycles(uint8_t op){
@@ -154,6 +155,74 @@ void MainIS::exec(uint8_t* is){
         case 0x7E:  z->A(z->mM->get(z->HL()));                                                          break;  //LD A, (HL)
         case 0x7F:  z->A(z->B());                                                                       break;  //LD A, A
 
+        case 0x80:  z->A(idas->add(z->A(), z->B()));                                                    break;  //ADD A, B
+        case 0x81:  z->A(idas->add(z->A(), z->C()));                                                    break;  //ADD A, C
+        case 0x82:  z->A(idas->add(z->A(), z->D()));                                                    break;  //ADD A, D
+        case 0x83:  z->A(idas->add(z->A(), z->E()));                                                    break;  //ADD A, E
+        case 0x84:  z->A(idas->add(z->A(), z->H()));                                                    break;  //ADD A, H
+        case 0x85:  z->A(idas->add(z->A(), z->L()));                                                    break;  //ADD A, L
+        case 0x86:  z->A(idas->add(z->A(), z->mM->get(z->HL())));                                       break;  //ADD A, (HL)
+        case 0x87:  z->A(idas->add(z->A(), z->A()));                                                    break;  //ADD A, A
+        case 0x88:  z->A(idas->adc(z->A(), z->B()));                                                    break;  //ADC A, B
+        case 0x89:  z->A(idas->adc(z->A(), z->C()));                                                    break;  //ADC A, C
+        case 0x8A:  z->A(idas->adc(z->A(), z->D()));                                                    break;  //ADC A, D
+        case 0x8B:  z->A(idas->adc(z->A(), z->E()));                                                    break;  //ADC A, E
+        case 0x8C:  z->A(idas->adc(z->A(), z->H()));                                                    break;  //ADC A, H
+        case 0x8D:  z->A(idas->adc(z->A(), z->L()));                                                    break;  //ADC A, L
+        case 0x8E:  z->A(idas->adc(z->A(), z->mM->get(z->HL())));                                       break;  //ADC A, (HL)
+        case 0x8F:  z->A(idas->adc(z->A(), z->A()));                                                    break;  //ADC A, A
+
+        case 0x90:  z->A(idas->sub(z->A(), z->B()));                                                    break;  //SUB B
+        case 0x91:  z->A(idas->sub(z->A(), z->C()));                                                    break;  //SUB C
+        case 0x92:  z->A(idas->sub(z->A(), z->D()));                                                    break;  //SUB D
+        case 0x93:  z->A(idas->sub(z->A(), z->E()));                                                    break;  //SUB E
+        case 0x94:  z->A(idas->sub(z->A(), z->H()));                                                    break;  //SUB H
+        case 0x95:  z->A(idas->sub(z->A(), z->L()));                                                    break;  //SUB L
+        case 0x96:  z->A(idas->sub(z->A(), z->mM->get(z->HL())));                                       break;  //SUB (HL)
+        case 0x97:  z->A(idas->sub(z->A(), z->A()));                                                    break;  //SUB A
+        case 0x98:  z->A(idas->sbc(z->A(), z->B()));                                                    break;  //SBC A, B
+        case 0x99:  z->A(idas->sbc(z->A(), z->C()));                                                    break;  //SBC A, C
+        case 0x9A:  z->A(idas->sbc(z->A(), z->D()));                                                    break;  //SBC A, D
+        case 0x9B:  z->A(idas->sbc(z->A(), z->E()));                                                    break;  //SBC A, E
+        case 0x9C:  z->A(idas->sbc(z->A(), z->H()));                                                    break;  //SBC A, H
+        case 0x9D:  z->A(idas->sbc(z->A(), z->L()));                                                    break;  //SBC A, L
+        case 0x9E:  z->A(idas->sbc(z->A(), z->mM->get(z->HL())));                                       break;  //SBC A, (HL)
+        case 0x9F:  z->A(idas->sbc(z->A(), z->A()));                                                    break;  //SBC A, A
+
+        case 0xA0:  z->A(arit->AND(z->A(), z->B()));                                                    break;  //AND B
+        case 0xA1:  z->A(arit->AND(z->A(), z->C()));                                                    break;  //AND C
+        case 0xA2:  z->A(arit->AND(z->A(), z->D()));                                                    break;  //AND D
+        case 0xA3:  z->A(arit->AND(z->A(), z->E()));                                                    break;  //AND E
+        case 0xA4:  z->A(arit->AND(z->A(), z->H()));                                                    break;  //AND H
+        case 0xA5:  z->A(arit->AND(z->A(), z->L()));                                                    break;  //AND L
+        case 0xA6:  z->A(arit->AND(z->A(), z->mM->get(z->HL())));                                       break;  //AND (HL)
+        case 0xA7:  z->A(arit->AND(z->A(), z->A()));                                                    break;  //AND A
+        case 0xA8:  z->A(arit->XOR(z->A(), z->B()));                                                    break;  //XOR B
+        case 0xA9:  z->A(arit->XOR(z->A(), z->C()));                                                    break;  //XOR C
+        case 0xAA:  z->A(arit->XOR(z->A(), z->D()));                                                    break;  //XOR D
+        case 0xAB:  z->A(arit->XOR(z->A(), z->E()));                                                    break;  //XOR E
+        case 0xAC:  z->A(arit->XOR(z->A(), z->H()));                                                    break;  //XOR H
+        case 0xAD:  z->A(arit->XOR(z->A(), z->L()));                                                    break;  //XOR L
+        case 0xAE:  z->A(arit->XOR(z->A(), z->mM->get(z->HL())));                                       break;  //XOR (HL)
+        case 0xAF:  z->A(arit->XOR(z->A(), z->A()));                                                    break;  //XOR A
+
+        case 0xB0:  z->A(arit->OR(z->A(), z->B()));                                                     break;  //OR B
+        case 0xB1:  z->A(arit->OR(z->A(), z->C()));                                                     break;  //OR C
+        case 0xB2:  z->A(arit->OR(z->A(), z->D()));                                                     break;  //OR D
+        case 0xB3:  z->A(arit->OR(z->A(), z->E()));                                                     break;  //OR E
+        case 0xB4:  z->A(arit->OR(z->A(), z->H()));                                                     break;  //OR H
+        case 0xB5:  z->A(arit->OR(z->A(), z->L()));                                                     break;  //OR L
+        case 0xB6:  z->A(arit->OR(z->A(), z->mM->get(z->HL())));                                        break;  //OR (HL)
+        case 0xB7:  z->A(arit->OR(z->A(), z->A()));                                                     break;  //OR A
+        case 0xB8:  arit->CP(z->A(), z->B());                                                           break;  //CP B
+        case 0xB9:  arit->CP(z->A(), z->C());                                                           break;  //CP C
+        case 0xBA:  arit->CP(z->A(), z->D());                                                           break;  //CP D
+        case 0xBB:  arit->CP(z->A(), z->E());                                                           break;  //CP E
+        case 0xBC:  arit->CP(z->A(), z->H());                                                           break;  //CP H
+        case 0xBD:  arit->CP(z->A(), z->L());                                                           break;  //CP L
+        case 0xBE:  arit->CP(z->A(), z->mM->get(z->HL()));                                              break;  //CP (HL)
+        case 0xBF:  arit->CP(z->A(), z->A());                                                           break;  //CP A
+        
         default:    log->logUnimplemented(op);                                                          break;  //Everything unimplemented
     };
 }
