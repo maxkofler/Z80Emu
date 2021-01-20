@@ -3,9 +3,11 @@
 MainIS::MainIS(Z80* z80, Log* log){
     this->z = z80;
     this->log = log;
+
     this->idas = new IncDecAddSub(this->z);
     this->rot = new Rotate(this->z);
     this->arit = new Arithmetic(this->z);
+    this->cpctl = new CPUctl(this->z);
 }
 
 uint8_t MainIS::getCycles(uint8_t op){
@@ -222,6 +224,23 @@ void MainIS::exec(uint8_t* is){
         case 0xBD:  arit->CP(z->A(), z->L());                                                           break;  //CP L
         case 0xBE:  arit->CP(z->A(), z->mM->get(z->HL()));                                              break;  //CP (HL)
         case 0xBF:  arit->CP(z->A(), z->A());                                                           break;  //CP A
+
+        case 0xC0:  z->SP(cpctl->ret(!z->ZF()));                                                        break;  //RET NZ
+        case 0xC1:  z->BC(cpctl->pop());                                                                break;  //POP BC
+        case 0xC2:  z->SP(cpctl->jp(!z->ZF(), z->getX16(is[1], is[2])));                                break;  //JP NZ, **
+        case 0xC3:  z->SP(cpctl->jp(true, z->getX16(is[1], is[2])));                                    break;  //JP **
+        case 0xC4:  z->SP(cpctl->call(!z->ZF(), z->getX16(is[1], is[2])));                              break;  //CALL NZ, **
+        case 0xC5:  cpctl->push(z->BC());                                                               break;  //PUSH BC
+        case 0xC6:  z->A(idas->add(z->A(), is[1]));                                                     break;  //ADD A, *
+        case 0xC7:  cpctl->rst(0x00);                                                                   break;  //RST 00h
+        case 0xC8:  z->SP(cpctl->ret(z->ZF()));                                                         break;  //RET Z
+        case 0xC9:  z->SP(cpctl->ret(true));                                                            break;  //RET
+        case 0xCA:  z->SP(cpctl->jp(z->ZF(), z->getX16(is[1], is[2])));                                 break;  //JP Z, **
+        //   0xCB:  ON THIS POSITION THE SWITCH TO THE BIT INSTRUCTIONS HAPPENS!!!
+        case 0xCC:  z->SP(cpctl->call(z->ZF(), z->getX16(is[1], is[2])));                               break;  //CALL Z, **
+        case 0xCD:  z->SP(cpctl->call(true, z->getX16(is[1], is[2])));                                  break;  //CALL **
+        case 0xCE:  z->A(idas->adc(z->A(), is[1]));                                                     break;  //ADC A, *
+        case 0xCF:  cpctl->rst(0x08);                                                                   break;  //RST 08h
         
         default:    log->logUnimplemented(op);                                                          break;  //Everything unimplemented
     };

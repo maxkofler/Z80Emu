@@ -5,9 +5,12 @@ class MainIS;
 
 #include "../../../../z80.h"
 #include "../../../log/log.h"
+
 #include "../rotate/rotate.h"
 #include "../arithmetic/arithmetic.h"
 #include "../incdecaddsub/incdecaddsub.h"
+#include "../cpuctl/cpuctl.h"
+
 #include <stdint.h>
 
 class MainIS{
@@ -20,6 +23,8 @@ private:
     IncDecAddSub* idas;
     Rotate* rot;
     Arithmetic* arit;
+    CPUctl* cpctl;
+
     Z80* z;
     Log* log;
 
