@@ -28,7 +28,7 @@ int main(){
                 is = z80.iManager->fetchIS(); 
                 z80.iManager->logIS(is);
                 z80.iManager->execIS(is);   
-                z80.logReg();
+                z80.logState();
                 z80.iManager->finalizeIS(is);
             }else{
                 cout << "Processor is in halt state! Type PC to enter new start address!" << endl;

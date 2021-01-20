@@ -59,6 +59,9 @@ uint8_t IncDecAddSub::add(uint8_t reg1, uint8_t reg2){
 
     return nreg8;
 }
+uint8_t IncDecAddSub::adc(uint8_t reg1, uint8_t reg2){
+    return 0;
+}
 uint16_t IncDecAddSub::addX16(uint16_t reg1, uint16_t reg2){
     //Affected:     C, N, H
     z80->NF(false);
@@ -79,6 +82,9 @@ uint8_t IncDecAddSub::sub(uint8_t reg1, uint8_t reg2){
     z80->ZF(nreg8 == 0);            //Set zero flag
 
     return nreg8;
+}
+uint8_t IncDecAddSub::sbc(uint8_t reg1, uint8_t reg2){
+    return 0;
 }
 uint16_t IncDecAddSub::subX16(uint16_t reg1, uint16_t reg2){
     //Affected:     C, N, H

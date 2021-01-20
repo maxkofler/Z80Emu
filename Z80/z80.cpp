@@ -26,12 +26,13 @@ void Z80::HL(uint16_t v){
     this->rL = v >> 8;      //HIGH
 }
 
-void Z80::logReg(){
+void Z80::logState(){
     using namespace std;
     cout << endl;
-    cout << "A=" << Log::toHexString(rA) << endl;
-    cout << "B=" << Log::toHexString(rB) << " C=" << Log::toHexString(rC) << endl;
-    cout << "D=" << Log::toHexString(rD) << " E=" << Log::toHexString(rE) << endl;
-    cout << "H=" << Log::toHexString(rH) << " L=" << Log::toHexString(rL) << endl;
+    cout << "A=" << Log::toHexString(rA) << "=" << Log::toBinString(rA) << "\t";
+    cout << "S=" << Sf << " Z=" << Zf << " H=" << Hf << " PV=" << PVf << " N=" << Nf << " C=" << Cf << endl;
+    cout << "B=" << Log::toHexString(rB) << "=" << Log::toBinString(rB) << "\t C=" << Log::toHexString(rC) << "=" << Log::toBinString(rC) << endl;
+    cout << "D=" << Log::toHexString(rD) << "=" << Log::toBinString(rD) << "\t E=" << Log::toHexString(rE) << "=" << Log::toBinString(rE) << endl;
+    cout << "H=" << Log::toHexString(rH) << "=" << Log::toBinString(rH) << "\t L=" << Log::toHexString(rL) << "=" << Log::toBinString(rL) << endl;
     cout << endl;
 }

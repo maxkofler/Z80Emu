@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <bitset>
 
 enum LOG{
     V = 1,
@@ -60,6 +61,13 @@ public:
         std::stringstream sstream;
         sstream << "0x" << std::hex << num;
         return sstream.str();
+    }
+
+    const static std::string toBinString(uint16_t num){
+        return "0b" + std::bitset< 16 >( num ).to_string();
+    }
+    const static std::string toBinString(uint8_t num){
+        return "0b" + std::bitset< 8 >( num ).to_string();
     }
 
     void logUnimplemented(uint8_t op){
