@@ -51,7 +51,7 @@ void BitIS::exec(uint8_t op){
         case 0x24:  z->H(rot->SLA(z->H()));                                                             break;  //SLA H
         case 0x25:  z->L(rot->SLA(z->L()));                                                             break;  //SLA L
         case 0x26:  z->mM->set(z->HL(), rot->SLA(z->mM->get(z->HL())));                                 break;  //SLA (HL)
-        case 0x27:  z->A(rot->SRA(z->A()));                                                             break;  //SLA A
+        case 0x27:  z->A(rot->SLA(z->A()));                                                             break;  //SLA A
         case 0x28:  z->B(rot->SRA(z->B()));                                                             break;  //SRA B
         case 0x29:  z->C(rot->SRA(z->C()));                                                             break;  //SRA C
         case 0x2A:  z->D(rot->SRA(z->D()));                                                             break;  //SRA D
@@ -62,9 +62,22 @@ void BitIS::exec(uint8_t op){
         case 0x2F:  z->A(rot->SRA(z->A()));                                                             break;  //SRA A
 
         case 0x30:  z->B(rot->SLL(z->B()));                                                             break;  //SLL B
-        //
+        case 0x31:  z->C(rot->SLL(z->C()));                                                             break;  //SLL C
+        case 0x32:  z->D(rot->SLL(z->D()));                                                             break;  //SLL D
+        case 0x33:  z->E(rot->SLL(z->E()));                                                             break;  //SLL E
+        case 0x34:  z->H(rot->SLL(z->H()));                                                             break;  //SLL H
+        case 0x35:  z->L(rot->SLL(z->L()));                                                             break;  //SLL L
+        case 0x36:  z->mM->set(z->HL(), rot->SLL(z->mM->get(z->HL())));                                 break;  //SLL (HL)
+        case 0x37:  z->A(rot->SLL(z->A()));                                                             break;  //SLL A
         case 0x38:  z->B(rot->SRL(z->B()));                                                             break;  //SRL B
-
+        case 0x39:  z->C(rot->SRL(z->C()));                                                             break;  //SRL C
+        case 0x3A:  z->D(rot->SRL(z->D()));                                                             break;  //SRL D
+        case 0x3B:  z->E(rot->SRL(z->E()));                                                             break;  //SRL E
+        case 0x3C:  z->H(rot->SRL(z->H()));                                                             break;  //SRL H
+        case 0x3D:  z->L(rot->SRL(z->L()));                                                             break;  //SRL L
+        case 0x3E:  z->mM->set(z->HL(), rot->SRL(z->mM->get(z->HL())));                                 break;  //SRL (HL)
+        case 0x3F:  z->A(rot->SRL(z->A()));                                                             break;  //SRL A
+        
         case 0x40:  bit->bit(0, z->B());                                                                break;  //BIT 0, B
         case 0x41:  bit->bit(0, z->C());                                                                break;  //BIT 0, C
         //...
