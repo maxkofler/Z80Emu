@@ -75,6 +75,13 @@ public:
     uint16_t SP(){return this->rPC;}
     void SP(uint16_t v){this->rPC = v;}
 
+    uint16_t IX(){return this->rIX;}
+    void IX(uint16_t v){this->rIX = v;}
+
+    uint16_t IY(){return this->rIX;}
+    void IY(uint16_t v){this->rIX = v;}
+
+
     uint64_t addCycles(uint64_t c){this->cycles += c; return this->cycles;}
 
     uint16_t getX16(uint8_t, uint8_t);

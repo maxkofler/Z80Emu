@@ -4,7 +4,8 @@ all: builddir
 	g++ -std=c++17 -o build/iManager.o -c Z80/iManager/iManager.cpp
 
 	g++ -std=c++17 -o build/mainIs.o -c Z80/iManager/iSet/MAINIS/mainIs.cpp
-	g++ -o build/bitIs.o -c "Z80/iManager/iSet/BIT/bitIS.cpp"
+	g++ -o build/bitIs.o -c Z80/iManager/iSet/BIT/bitIS.cpp
+	g++ -o build/ixcb.o -c Z80/iManager/iSet/IXCB/ixcb.cpp
 
 
 	g++ -std=c++17 -o build/incdecaddsub.o -c Z80/iManager/iSet/incdecaddsub/incdecaddsub.cpp
@@ -18,7 +19,7 @@ all: builddir
 
 	g++ -std=c++17 -o build/main.o -c main.cpp
 
-	(cd build && g++ -std=c++17 -o ../z80.out main.o z80.o iManager.o iSet.o incdecaddsub.o memoryManager.o mainIs.o bitIs.o rotate.o arithmetic.o cpuctl.o bit.o)
+	(cd build && g++ -std=c++17 -o ../z80.out main.o z80.o iManager.o iSet.o incdecaddsub.o memoryManager.o mainIs.o bitIs.o ixcb.o rotate.o arithmetic.o cpuctl.o bit.o)
 
 
 builddir:
