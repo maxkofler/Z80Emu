@@ -214,10 +214,73 @@ void BitIS::exec(uint8_t op){
         case 0xBE:  z->mM->set(z->HL(), bit->res(7, z->mM->get(z->HL())));                              break;  //RES 7, (HL)
         case 0xBF:  z->A(bit->res(7, z->A()));                                                          break;  //RES 7, A
 
-        case 0xC0:  z->B(bit->set(0, z->B()));                                                          break;  //RES 0, B
-        case 0xC1:  z->C(bit->set(0, z->C()));                                                          break;  //RES 0, B
-        //...
+        case 0xC0:  z->B(bit->set(0, z->B()));                                                          break;  //SET 0, B
+        case 0xC1:  z->C(bit->set(0, z->C()));                                                          break;  //SET 0, C
+        case 0xC2:  z->D(bit->set(0, z->B()));                                                          break;  //SET 0, D
+        case 0xC3:  z->E(bit->set(0, z->C()));                                                          break;  //SET 0, E
+        case 0xC4:  z->H(bit->set(0, z->B()));                                                          break;  //SET 0, H
+        case 0xC5:  z->L(bit->set(0, z->C()));                                                          break;  //SET 0, L
+        case 0xC6:  z->mM->set(z->HL(), bit->set(0, z->mM->get(z->HL())));                              break;  //SET 0, (HL)
+        case 0xC7:  z->A(bit->set(0, z->C()));                                                          break;  //SET 0, A
+        case 0xC8:  z->B(bit->set(1, z->B()));                                                          break;  //SET 1, B
+        case 0xC9:  z->C(bit->set(1, z->C()));                                                          break;  //SET 1, C
+        case 0xCA:  z->D(bit->set(1, z->B()));                                                          break;  //SET 1, D
+        case 0xCB:  z->E(bit->set(1, z->C()));                                                          break;  //SET 1, E
+        case 0xCC:  z->H(bit->set(1, z->B()));                                                          break;  //SET 1, H
+        case 0xCD:  z->L(bit->set(1, z->C()));                                                          break;  //SET 1, L
+        case 0xCE:  z->mM->set(z->HL(), bit->set(1, z->mM->get(z->HL())));                              break;  //SET 1, (HL)
+        case 0xCF:  z->A(bit->set(1, z->C()));                                                          break;  //SET 1, A
 
+        case 0xD0:  z->B(bit->set(2, z->B()));                                                          break;  //SET 2, B
+        case 0xD1:  z->C(bit->set(2, z->C()));                                                          break;  //SET 2, C
+        case 0xD2:  z->D(bit->set(2, z->B()));                                                          break;  //SET 2, D
+        case 0xD3:  z->E(bit->set(2, z->C()));                                                          break;  //SET 2, E
+        case 0xD4:  z->H(bit->set(2, z->B()));                                                          break;  //SET 2, H
+        case 0xD5:  z->L(bit->set(2, z->C()));                                                          break;  //SET 2, L
+        case 0xD6:  z->mM->set(z->HL(), bit->set(2, z->mM->get(z->HL())));                              break;  //SET 2, (HL)
+        case 0xD7:  z->A(bit->set(2, z->C()));                                                          break;  //SET 2, A
+        case 0xD8:  z->B(bit->set(3, z->B()));                                                          break;  //SET 3, B
+        case 0xD9:  z->C(bit->set(3, z->C()));                                                          break;  //SET 3, C
+        case 0xDA:  z->D(bit->set(3, z->B()));                                                          break;  //SET 3, D
+        case 0xDB:  z->E(bit->set(3, z->C()));                                                          break;  //SET 3, E
+        case 0xDC:  z->H(bit->set(3, z->B()));                                                          break;  //SET 3, H
+        case 0xDD:  z->L(bit->set(3, z->C()));                                                          break;  //SET 3, L
+        case 0xDE:  z->mM->set(z->HL(), bit->set(3, z->mM->get(z->HL())));                              break;  //SET 3, (HL)
+        case 0xDF:  z->A(bit->set(3, z->C()));                                                          break;  //SET 3, A
+        
+        case 0xE0:  z->B(bit->set(4, z->B()));                                                          break;  //SET 4, B
+        case 0xE1:  z->C(bit->set(4, z->C()));                                                          break;  //SET 4, C
+        case 0xE2:  z->D(bit->set(4, z->B()));                                                          break;  //SET 4, D
+        case 0xE3:  z->E(bit->set(4, z->C()));                                                          break;  //SET 4, E
+        case 0xE4:  z->H(bit->set(4, z->B()));                                                          break;  //SET 4, H
+        case 0xE5:  z->L(bit->set(4, z->C()));                                                          break;  //SET 4, L
+        case 0xE6:  z->mM->set(z->HL(), bit->set(4, z->mM->get(z->HL())));                              break;  //SET 4, (HL)
+        case 0xE7:  z->A(bit->set(4, z->C()));                                                          break;  //SET 4, A
+        case 0xE8:  z->B(bit->set(5, z->B()));                                                          break;  //SET 5, B
+        case 0xE9:  z->C(bit->set(5, z->C()));                                                          break;  //SET 5, C
+        case 0xEA:  z->D(bit->set(5, z->B()));                                                          break;  //SET 5, D
+        case 0xEB:  z->E(bit->set(5, z->C()));                                                          break;  //SET 5, E
+        case 0xEC:  z->H(bit->set(5, z->B()));                                                          break;  //SET 5, H
+        case 0xED:  z->L(bit->set(5, z->C()));                                                          break;  //SET 5, L
+        case 0xEE:  z->mM->set(z->HL(), bit->set(5, z->mM->get(z->HL())));                              break;  //SET 5, (HL)
+        case 0xEF:  z->A(bit->set(5, z->C()));                                                          break;  //SET 5, A
+
+        case 0xF0:  z->B(bit->set(6, z->B()));                                                          break;  //SET 6, B
+        case 0xF1:  z->C(bit->set(6, z->C()));                                                          break;  //SET 6, C
+        case 0xF2:  z->D(bit->set(6, z->B()));                                                          break;  //SET 6, D
+        case 0xF3:  z->E(bit->set(6, z->C()));                                                          break;  //SET 6, E
+        case 0xF4:  z->H(bit->set(6, z->B()));                                                          break;  //SET 6, H
+        case 0xF5:  z->L(bit->set(6, z->C()));                                                          break;  //SET 6, L
+        case 0xF6:  z->mM->set(z->HL(), bit->set(6, z->mM->get(z->HL())));                              break;  //SET 6, (HL)
+        case 0xF7:  z->A(bit->set(6, z->C()));                                                          break;  //SET 6, A
+        case 0xF8:  z->B(bit->set(7, z->B()));                                                          break;  //SET 7, B
+        case 0xF9:  z->C(bit->set(7, z->C()));                                                          break;  //SET 7, C
+        case 0xFA:  z->D(bit->set(7, z->B()));                                                          break;  //SET 7, D
+        case 0xFB:  z->E(bit->set(7, z->C()));                                                          break;  //SET 7, E
+        case 0xFC:  z->H(bit->set(7, z->B()));                                                          break;  //SET 7, H
+        case 0xFD:  z->L(bit->set(7, z->C()));                                                          break;  //SET 7, L
+        case 0xFE:  z->mM->set(z->HL(), bit->set(7, z->mM->get(z->HL())));                              break;  //SET 7, (HL)
+        case 0xFF:  z->A(bit->set(7, z->C()));                                                          break;  //SET 7, A
 
         default:    log->logUnimplemented(op);                                                          break;  //Not implemented instructions
     }
