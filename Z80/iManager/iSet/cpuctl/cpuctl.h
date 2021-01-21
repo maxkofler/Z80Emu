@@ -8,9 +8,9 @@ class CPUctl;
 
 class CPUctl{
 public:
-    CPUctl(Z80*);
+    CPUctl(Z80*, Log* log);
 
-    //If condition is true, ** wil be returned and then copied into PC
+    //If condition is true, ** wil be returned and so copied into PC
     uint16_t    jp      (bool condition, uint16_t position);
     
     //If condition is true, *(offset - signed) will be added to PC
@@ -37,13 +37,15 @@ public:
     void        rst     (uint8_t new_value);
 
     //Exchanges the two 16bit values of reg1 and reg2
-    void        ex      (uint16_t* reg1, uint16_t* reg2);
+    void        ex      (uint8_t* reg1a, uint8_t* reg2a, uint8_t* reg1b, uint8_t* reg2b);
 
     //Exchanges the values of the primary and shadow registers
     void        exx     ();
 
 private:
     Z80* z80;
+    Log* log;
+
 };
 
 #endif

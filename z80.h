@@ -32,6 +32,14 @@ public:
     uint8_t H(){return this->rH;}
     uint8_t L(){return this->rL;}
 
+    uint8_t* pA(){return &this->rA;}
+    uint8_t* pB(){return &this->rB;}
+    uint8_t* pC(){return &this->rC;}
+    uint8_t* pD(){return &this->rD;}
+    uint8_t* pE(){return &this->rE;}
+    uint8_t* pH(){return &this->rH;}
+    uint8_t* pL(){return &this->rL;}
+
     void A(uint8_t v){this->rA = v;}
     void B(uint8_t v){this->rB = v;}
     void C(uint8_t v){this->rC = v;}

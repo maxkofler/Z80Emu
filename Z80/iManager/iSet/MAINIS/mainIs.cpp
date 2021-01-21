@@ -7,7 +7,7 @@ MainIS::MainIS(Z80* z80, Log* log){
     this->idas = new IncDecAddSub(this->z);
     this->rot = new Rotate(this->z);
     this->arit = new Arithmetic(this->z);
-    this->cpctl = new CPUctl(this->z);
+    this->cpctl = new CPUctl(this->z, this->log);
 }
 
 uint8_t MainIS::getCycles(uint8_t op){
