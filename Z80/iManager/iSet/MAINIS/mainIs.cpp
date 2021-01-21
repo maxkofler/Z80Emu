@@ -259,24 +259,41 @@ void MainIS::exec(uint8_t* is){
         case 0xDE:  z->A(idas->sbc(z->A(), is[1]));                                                     break;  //SBC A, *
         case 0xDF:  cpctl->rst(0x18);                                                                   break;  //RST 18h
 
-        case 0xE0:  z->PC(cpctl->ret(!z->PVF()));                                                       break;  //RET PO        ??      nPV     ??
-        case 0xE1:  z->HL(cpctl->pop());                                                                break;  //POP HL
-        case 0xE2:  z->PC(cpctl->jp(!z->PVF(), z->getX16(is[1], is[2])));                               break;  //JP PO, **     ??      nPV     ??
+        //case 0xE0:  z->PC(cpctl->ret(!z->PVF()));                                                       break;  //RET PO        ??      nPV     ??
+        //case 0xE1:  z->HL(cpctl->pop());                                                                break;  //POP HL
+        //case 0xE2:  z->PC(cpctl->jp(!z->PVF(), z->getX16(is[1], is[2])));                               break;  //JP PO, **     ??      nPV     ??
         case 0xE3:  log->logUnimplemented(op);                                                          break;  //EX (SP), HL
-        case 0xE4:  z->PC(cpctl->call(!z->PVF(), z->getX16(is[1], is[2])));                             break;  //CALL PO, **   ??      nPV     ??
+        //case 0xE4:  z->PC(cpctl->call(!z->PVF(), z->getX16(is[1], is[2])));                             break;  //CALL PO, **   ??      nPV     ??
         case 0xE5:  cpctl->push(z->HL());                                                               break;  //PUSH HL
         case 0xE6:  z->A(arit->AND(z->A(), is[1]));                                                     break;  //AND *
         case 0xE7:  cpctl->rst(0x20);                                                                   break;  //RST 20h
-        case 0xE8:  z->PC(cpctl->ret(z->PVF()));                                                        break;  //RET PE        ??      PV      ??
+        //case 0xE8:  z->PC(cpctl->ret(z->PVF()));                                                        break;  //RET PE        ??      PV      ??
         case 0xE9:  z->PC(cpctl->jp(true, z->mM->getX16(z->HL())));                                     break;  //JP (HL)
-        case 0xEA:  z->PC(cpctl->jp(z->PVF(), z->getX16(is[1], is[2])));                                break;  //JP PE, **     ??      PV      ??
+        //case 0xEA:  z->PC(cpctl->jp(z->PVF(), z->getX16(is[1], is[2])));                                break;  //JP PE, **     ??      PV      ??
         case 0xEB:  log->logUnimplemented(op);                                                          break;  //EX DE, HL
-        case 0xEC:  z->PC(cpctl->call(z->PVF(), z->getX16(is[1], is[2])));                              break;  //CALL PE, **   ??      PV      ??
-        //   0xED:  ON THIS POSITION THE SWITCH TO THE IX INSTRUCTIONS HAPPENS!!!
+        //case 0xEC:  z->PC(cpctl->call(z->PVF(), z->getX16(is[1], is[2])));                              break;  //CALL PE, **   ??      PV      ??
+        //   0xED:  ON THIS POSITION THE SWITCH TO THE EXTD INSTRUCTIONS HAPPENS!!!
         case 0xEE:  z->A(arit->XOR(z->A(), is[1]));                                                     break;  //XOR *
         case 0xEF:  cpctl->rst(0x28);                                                                   break;  //RST 28h
 
-        
+        //case 0xF0:  z->PC(cpctl->ret(!z->PVF()));                                                       break;  //RET P        ??      nPV     ??
+        //case 0xF1:  z->HL(cpctl->pop());                                                                break;  //POP AF
+        //case 0xF2:  z->PC(cpctl->jp(!z->PVF(), z->getX16(is[1], is[2])));                               break;  //JP P, **     ??      nPV     ??
+        //case 0xF3:  log->logUnimplemented(op);                                                          break;  //EX (SP), HL
+        //case 0xF4:  z->PC(cpctl->call(!z->PVF(), z->getX16(is[1], is[2])));                             break;  //CALL P, **   ??      nPV     ??
+        //case 0xF5:  cpctl->push(z->AF());                                                               break;  //PUSH AF
+        case 0xF6:  z->A(arit->OR(z->A(), is[1]));                                                      break;  //OR *
+        case 0xF7:  cpctl->rst(0x30);                                                                   break;  //RST 30h
+        //case 0xF8:  z->PC(cpctl->ret(z->PVF()));                                                        break;  //RET M        ??      PV      ??
+        case 0xF9:  z->SP(z->HL());                                                                     break;  //LD SP, HL
+        //case 0xFA:  z->PC(cpctl->jp(z->PVF(), z->getX16(is[1], is[2])));                                break;  //JP PM, **     ??      PV      ??
+        //case 0xFB:  log->logUnimplemented(op);                                                          break;  //EI
+        //case 0xFC:  z->PC(cpctl->call(z->PVF(), z->getX16(is[1], is[2])));                              break;  //CALL M, **   ??      PV      ??
+        //   0xFD:  ON THIS POSITION THE SWITCH TO THE IY INSTRUCTIONS HAPPENS!!!
+        case 0xFE:  arit->CP(z->A(), is[1]);                                                            break;  //CP *
+        case 0xFF:  cpctl->rst(0x38);                                                                   break;  //RST 38h
+
+
         default:    log->logUnimplemented(op);                                                          break;  //Everything unimplemented
     };
 }
