@@ -29,8 +29,17 @@ uint16_t    CPUctl::ret     (bool c){
     return 0;
 }
 
+//SP is decremented, value(first 8bit) will be stored in location pointed by SP,
+//SP is decremented again and the same procedure follows with value(last 8bit)
 void        CPUctl::push    (uint16_t v){
+    //No flags affected
+    uint8_t low = v & 0x00FF;
+    uint8_t high = v >> 8;
 
+    z80->SP(z80->SP()-1);
+    z80->mM->set(z80->SP(), high);
+    z80->SP(z80->SP()-1);
+    z80->mM->set(z80->SP(), low);
 }
 uint16_t    CPUctl::pop     (){
     return 0;
