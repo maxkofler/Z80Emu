@@ -32,7 +32,6 @@ private:
     MainIS* mainIS;
     BitIS* bitIS;
 
-    uint16_t opsImplemented;
     uint8_t *opBytes;
 };
 
