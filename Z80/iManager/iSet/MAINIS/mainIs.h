@@ -28,9 +28,7 @@ private:
     Z80* z;
     Log* log;
 
-    uint8_t cycles[16] = {
-        4, 10, 7, 6, 4, 4, 7, 4, 4, 11, 7, 6, 4, 4, 7, 4
-    };
+    uint8_t* cycles;
 };
 
 #endif

@@ -8,6 +8,14 @@ MainIS::MainIS(Z80* z80, Log* log){
     this->rot = new Rotate(this->z);
     this->arit = new Arithmetic(this->z);
     this->cpctl = new CPUctl(this->z);
+
+    // [opcode] will add their own cycles to the cpu, because their cycles are action-dependent
+    //  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F
+    this->cycles = new uint8_t[48]{
+        4, 10, 7, 6, 4, 4, 7, 4, 4, 11, 7, 6, 4, 4, 7, 4,       //0x00
+        0, 10, 7, 6, 4, 4, 7, 4, 12, 11, 7, 6, 4, 4, 7, 3,      //0x10      [0x10]
+        0, 10, 16, 6, 4, 4, 7, 4, 0, 11, 16, 6, 4, 4, 7, 4      //0x20      [0x20, 0x28]
+    };
 }
 
 uint8_t MainIS::getCycles(uint8_t op){
