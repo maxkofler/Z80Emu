@@ -17,6 +17,7 @@ int main(){
     uint8_t* is;
 
     z80.PC(0x1000);
+    z80.logState();
 
     while (run){
         cout << ">";

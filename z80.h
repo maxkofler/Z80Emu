@@ -88,8 +88,8 @@ public:
     uint16_t PC(){return this->rPC;}
     void PC(uint16_t v){this->rPC = v;}
 
-    uint16_t SP(){return this->rPC;}
-    void SP(uint16_t v){this->rPC = v;}
+    uint16_t SP(){return this->rSP;}
+    void SP(uint16_t v){this->rSP = v;}
 
     uint16_t IX(){return this->rIX;}
     void IX(uint16_t v){this->rIX = v;}

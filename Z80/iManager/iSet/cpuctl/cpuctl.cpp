@@ -36,14 +36,14 @@ void CPUctl::push(uint16_t v){
     uint8_t high = v >> 8;
 
     z80->SP(z80->SP()-1);
-    z80->mM->set(z80->SP(), high);
-    z80->SP(z80->SP()-1);
     z80->mM->set(z80->SP(), low);
+    z80->SP(z80->SP()-1);
+    z80->mM->set(z80->SP(), high);
 }
 uint16_t CPUctl::pop(){
-    uint8_t low = z80->mM->get(z80->SP());
-    z80->SP(z80->SP()+1);
     uint8_t high = z80->mM->get(z80->SP());
+    z80->SP(z80->SP()+1);
+    uint8_t low = z80->mM->get(z80->SP());
     z80->SP(z80->SP()+1);
     return z80->getX16(high, low);
 }
