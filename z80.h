@@ -32,6 +32,22 @@ public:
     uint8_t H(){return this->rH;}
     uint8_t L(){return this->rL;}
 
+    uint8_t* pA(){return &this->rA;}
+    uint8_t* pB(){return &this->rB;}
+    uint8_t* pC(){return &this->rC;}
+    uint8_t* pD(){return &this->rD;}
+    uint8_t* pE(){return &this->rE;}
+    uint8_t* pH(){return &this->rH;}
+    uint8_t* pL(){return &this->rL;}
+
+    uint8_t* pAx(){return &this->rAx;}
+    uint8_t* pBx(){return &this->rBx;}
+    uint8_t* pCx(){return &this->rCx;}
+    uint8_t* pDx(){return &this->rDx;}
+    uint8_t* pEx(){return &this->rEx;}
+    uint8_t* pHx(){return &this->rHx;}
+    uint8_t* pLx(){return &this->rLx;}
+
     void A(uint8_t v){this->rA = v;}
     void B(uint8_t v){this->rB = v;}
     void C(uint8_t v){this->rC = v;}
@@ -40,9 +56,9 @@ public:
     void H(uint8_t v){this->rH = v;}
     void L(uint8_t v){this->rL = v;}
 
-    uint16_t BC(){return this->getX16(this->rC, this->rB);}
-    uint16_t DE(){return this->getX16(this->rE, this->rD);}
-    uint16_t HL(){return this->getX16(this->rL, this->rH);}
+    uint16_t BC(){return this->getX16(this->rB, this->rC);}
+    uint16_t DE(){return this->getX16(this->rD, this->rE);}
+    uint16_t HL(){return this->getX16(this->rH, this->rL);}
 
     void BC(uint16_t);
     void DE(uint16_t);
@@ -72,8 +88,8 @@ public:
     uint16_t PC(){return this->rPC;}
     void PC(uint16_t v){this->rPC = v;}
 
-    uint16_t SP(){return this->rPC;}
-    void SP(uint16_t v){this->rPC = v;}
+    uint16_t SP(){return this->rSP;}
+    void SP(uint16_t v){this->rSP = v;}
 
     uint16_t IX(){return this->rIX;}
     void IX(uint16_t v){this->rIX = v;}

@@ -73,12 +73,11 @@ void ISet::execIS(uint8_t* is){
 
 uint8_t ISet::getISCycles(uint8_t opcode){
     if (opcode == 0xCB){
-        log->log("ISet::getISCycles()", "Getting instruction cycles from Bit instruction set (" + std::to_string(opcode) + ")", Log::D3);
+        log->log("ISet::getISCycles()", "Getting instruction cycles from Bit instruction set (" + Log::toHexString(opcode) + ")", Log::D3);
         return this->bitIS->getCycles(opcode);
     }
     else{
-        log->log("ISet::getISCycles()", "Getting instruction cycles from Main instruction set (" + std::to_string(opcode) + ")", Log::D3);
+        log->log("ISet::getISCycles()", "Getting instruction cycles from Main instruction set (" + Log::toHexString(opcode) + ")", Log::D3);
         return this->mainIS->getCycles(opcode);
     }
-    
 }

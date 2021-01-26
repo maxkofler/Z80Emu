@@ -7,7 +7,7 @@ MainIS::MainIS(Z80* z80, Log* log){
     this->idas = new IncDecAddSub(this->z);
     this->rot = new Rotate(this->z);
     this->arit = new Arithmetic(this->z);
-    this->cpctl = new CPUctl(this->z);
+    this->cpctl = new CPUctl(this->z, this->log);
 
     // [opcode] will add their own cycles to the cpu, because their cycles are action-dependent
     //  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  A,  B,  C,  D,  E,  F
@@ -20,7 +20,7 @@ MainIS::MainIS(Z80* z80, Log* log){
         4,  4,  4,  4,  4,  4,  7,  4,  4,  4,  4,  4,  4,  4,  7,  4,      //0x40
         4,  4,  4,  4,  4,  4,  7,  4,  4,  4,  4,  4,  4,  4,  7,  4,      //0x50
         4,  4,  4,  4,  4,  4,  7,  4,  4,  4,  4,  4,  4,  4,  7,  4,      //0x60
-        4,  4,  4,  4,  4,  4,  7,  4,  4,  4,  4,  4,  4,  4,  7,  4,      //0x70
+        7,  7,  7,  7,  7,  7,  4,  7,  4,  4,  4,  4,  4,  4,  7,  4,      //0x70
         4,  4,  4,  4,  4,  4,  7,  4,  4,  4,  4,  4,  4,  4,  7,  4,      //0x80
         4,  4,  4,  4,  4,  4,  7,  4,  4,  4,  4,  4,  4,  4,  7,  4,      //0x90
         4,  4,  4,  4,  4,  4,  7,  4,  4,  4,  4,  4,  4,  4,  7,  4,      //0xA0
@@ -42,7 +42,7 @@ void MainIS::exec(uint8_t* is){
     uint8_t op = is[0];
     switch(op){
         case 0x00:                                                                                      break;  //NOP
-        case 0x01:  z->BC(z->getX16(is[1], is[2]));                                                     break;  //LD BC, **
+        case 0x01:  z->BC(z->getX16(is[2], is[1]));                                                     break;  //LD BC, **
         case 0x02:  z->mM->set(z->BC(), z->A());                                                        break;  //LC (BC), A
         case 0x03:  z->BC(idas->incX16(z->BC()));                                                       break;  //INC BC
         case 0x04:  z->B(idas->inc(z->B()));                                                            break;  //INC B
@@ -59,14 +59,14 @@ void MainIS::exec(uint8_t* is){
         case 0x0F:  z->A(rot->RRC(z->A()));                                                             break;  //RRCA
 
         case 0x10:  log->logUnimplemented(op);                                                          break;  //DJNZ *            NOT IMPLEMENTED YET!
-        case 0x11:  z->DE(z->getX16(is[1], is[2]));                                                     break;  //LD DE, **
+        case 0x11:  z->DE(z->getX16(is[2], is[1]));                                                     break;  //LD DE, **
         case 0x12:  z->mM->set(z->DE(), z->A());                                                        break;  //LC (DE), A
         case 0x13:  z->DE(idas->incX16(z->DE()));                                                       break;  //INC DE
         case 0x14:  z->D(idas->inc(z->D()));                                                            break;  //INC D
         case 0x15:  z->D(idas->dec(z->D()));                                                            break;  //DEC D
         case 0x16:  z->D(is[1]);                                                                        break;  //LD D, *
         case 0x17:  z->A(rot->RL(z->A()));                                                              break;  //RLA
-        case 0x18:  log->logUnimplemented(op);                                                          break;  //JR *              NOT IMPLEMENTED YET!
+        case 0x18:  z->PC(cpctl->jr(true, is[1]));                                                      break;  //JR *
         case 0x19:  z->HL(idas->addX16(z->HL(), z->DE()));                                              break;  //ADD HL, DE
         case 0x1A:  z->A(z->mM->get(z->DE()));                                                          break;  //LD A, (DE)
         case 0x1B:  z->DE(idas->decX16(z->DE()));                                                       break;  //DEC DE
@@ -75,34 +75,34 @@ void MainIS::exec(uint8_t* is){
         case 0x1E:  z->E(is[1]);                                                                        break;  //LD E, *
         case 0x1F:  z->A(rot->RR(z->A()));                                                              break;  //RRA
         
-        case 0x20:  log->logUnimplemented(op);                                                          break;  //JR NZ; *         NOT IMPLEMENTED YET!
-        case 0x21:  z->HL(z->getX16(is[1], is[2]));                                                     break;  //LD HL, **
-        case 0x22:  z->mM->setX16(z->getX16(is[1], is[2]), z->HL());                                    break;  //LD (**), HL
+        case 0x20:  z->PC(cpctl->jr(!z->ZF(), is[1]));                                                  break;  //JR NZ; *
+        case 0x21:  z->HL(z->getX16(is[2], is[1]));                                                     break;  //LD HL, **
+        case 0x22:  z->mM->setX16(z->getX16(is[2], is[1]), z->HL());                                    break;  //LD (**), HL
         case 0x23:  z->HL(idas->incX16(z->HL()));                                                       break;  //INC HL
         case 0x24:  z->H(idas->inc(z->H()));                                                            break;  //INC H
         case 0x25:  z->H(idas->dec(z->H()));                                                            break;  //DEC H
         case 0x26:  z->H(is[1]);                                                                        break;  //LD H, *
         case 0x27:  log->logUnimplemented(op);                                                          break;  //DAA              NOT IMPLEMENTED YET!
-        case 0x28:  log->logUnimplemented(op);                                                          break;  //JR Z, *          NOT IMPLEMENTED YET!
+        case 0x28:  z->PC(cpctl->jr(z->ZF(), is[1]));                                                   break;  //JR Z, *
         case 0x29:  z->HL(idas->addX16(z->HL(), z->HL()));                                              break;  //ADD HL, HL
-        case 0x2A:  z->HL(z->mM->getX16(z->getX16(is[1], is[2])));                                      break;  //LD HL, (**)
+        case 0x2A:  z->HL(z->mM->getX16(z->getX16(is[2], is[1])));                                      break;  //LD HL, (**)
         case 0x2B:  z->HL(idas->decX16(z->HL()));                                                       break;  //DEC HL
         case 0x2C:  z->L(idas->inc(z->L()));                                                            break;  //INC L
         case 0x2D:  z->L(idas->dec(z->L()));                                                            break;  //DEC L
         case 0x2E:  z->L(is[1]);                                                                        break;  //LD L, *
         case 0x2F:  log->logUnimplemented(op);                                                          break;  //CPL              NOT IMPLEMENTED YET!
 
-        case 0x30:  log->logUnimplemented(op);                                                          break;  //JR NC, *         NOT IMPLEMENTED YET!
-        case 0x31:  z->SP(z->getX16(is[1], is[2]));                                                     break;  //LD SP, **
-        case 0x32:  z->mM->set(z->getX16(is[1], is[2]), z->A());                                        break;  //LD (**), A
+        case 0x30:  z->PC(cpctl->jr(!z->CF(), is[1]));                                                  break;  //JR NC, *
+        case 0x31:  z->SP(z->getX16(is[2], is[1]));                                                     break;  //LD SP, **
+        case 0x32:  z->mM->set(z->getX16(is[2], is[1]), z->A());                                        break;  //LD (**), A
         case 0x33:  z->SP(idas->incX16(z->SP()));                                                       break;  //INC SP
         case 0x34:  log->logUnimplemented(op);                                                          break;  //INC (HL)         NIY!
         case 0x35:  log->logUnimplemented(op);                                                          break;  //DEC (HL)         NIY!
         case 0x36:  z->mM->set(z->HL(), is[1]);                                                         break;  //LD (HL), *
         case 0x37:  log->logUnimplemented(op);                                                          break;  //SCF              NIY!
-        case 0x38:  log->logUnimplemented(op);                                                          break;  //JR C, *          NIY!
+        case 0x38:  z->PC(cpctl->jr(z->CF(), is[1]));                                                   break;  //JR C, *
         case 0x39:  z->HL(idas->addX16(z->HL(), z->SP()));                                              break;  //ADD HL, SP
-        case 0x3A:  z->A(z->mM->get(z->getX16(is[1], is[2])));                                          break;  //LD A, (**)
+        case 0x3A:  z->A(z->mM->get(z->getX16(is[2], is[1])));                                          break;  //LD A, (**)
         case 0x3B:  z->SP(idas->decX16(z->SP()));                                                       break;  //DEC SP
         case 0x3C:  z->A(idas->inc(z->A()));                                                            break;  //INC A
         case 0x3D:  z->A(idas->dec(z->A()));                                                            break;  //DEC A
@@ -247,68 +247,68 @@ void MainIS::exec(uint8_t* is){
 
         case 0xC0:  z->PC(cpctl->ret(!z->ZF()));                                                        break;  //RET NZ
         case 0xC1:  z->BC(cpctl->pop());                                                                break;  //POP BC
-        case 0xC2:  z->PC(cpctl->jp(!z->ZF(), z->getX16(is[1], is[2])));                                break;  //JP NZ, **
-        case 0xC3:  z->PC(cpctl->jp(true, z->getX16(is[1], is[2])));                                    break;  //JP **
-        case 0xC4:  z->PC(cpctl->call(!z->ZF(), z->getX16(is[1], is[2])));                              break;  //CALL NZ, **
+        case 0xC2:  z->PC(cpctl->jp(!z->ZF(), z->getX16(is[2], is[1])));                                break;  //JP NZ, **
+        case 0xC3:  z->PC(cpctl->jp(true, z->getX16(is[2], is[1])));                                    break;  //JP **
+        case 0xC4:  z->PC(cpctl->call(!z->ZF(), z->getX16(is[2], is[1])));                              break;  //CALL NZ, **
         case 0xC5:  cpctl->push(z->BC());                                                               break;  //PUSH BC
         case 0xC6:  z->A(idas->add(z->A(), is[1]));                                                     break;  //ADD A, *
         case 0xC7:  cpctl->rst(0x00);                                                                   break;  //RST 00h
         case 0xC8:  z->PC(cpctl->ret(z->ZF()));                                                         break;  //RET Z
         case 0xC9:  z->PC(cpctl->ret(true));                                                            break;  //RET
-        case 0xCA:  z->PC(cpctl->jp(z->ZF(), z->getX16(is[1], is[2])));                                 break;  //JP Z, **
+        case 0xCA:  z->PC(cpctl->jp(z->ZF(), z->getX16(is[2], is[1])));                                 break;  //JP Z, **
         //   0xCB:  ON THIS POSITION THE SWITCH TO THE BIT INSTRUCTIONS HAPPENS!!!
-        case 0xCC:  z->PC(cpctl->call(z->ZF(), z->getX16(is[1], is[2])));                               break;  //CALL Z, **
-        case 0xCD:  z->PC(cpctl->call(true, z->getX16(is[1], is[2])));                                  break;  //CALL **
+        case 0xCC:  z->PC(cpctl->call(z->ZF(), z->getX16(is[2], is[1])));                               break;  //CALL Z, **
+        case 0xCD:  z->PC(cpctl->call(true, z->getX16(is[2], is[1])));                                  break;  //CALL **
         case 0xCE:  z->A(idas->adc(z->A(), is[1]));                                                     break;  //ADC A, *
         case 0xCF:  cpctl->rst(0x08);                                                                   break;  //RST 08h
 
         case 0xD0:  z->PC(cpctl->ret(!z->CF()));                                                        break;  //RET NC
         case 0xD1:  z->DE(cpctl->pop());                                                                break;  //POP DE
-        case 0xD2:  z->PC(cpctl->jp(!z->CF(), z->getX16(is[1], is[2])));                                break;  //JP NC, **
+        case 0xD2:  z->PC(cpctl->jp(!z->CF(), z->getX16(is[2], is[1])));                                break;  //JP NC, **
         case 0xD3:  log->logUnimplemented(op);                                                          break;  //OUT (*), A
-        case 0xD4:  z->PC(cpctl->call(!z->CF(), z->getX16(is[1], is[2])));                              break;  //CALL NC, **
+        case 0xD4:  z->PC(cpctl->call(!z->CF(), z->getX16(is[2], is[1])));                              break;  //CALL NC, **
         case 0xD5:  cpctl->push(z->DE());                                                               break;  //PUSH DE
         case 0xD6:  z->A(idas->sub(z->A(), is[1]));                                                     break;  //SUB *
         case 0xD7:  cpctl->rst(0x10);                                                                   break;  //RST 10h
         case 0xD8:  z->PC(cpctl->ret(z->CF()));                                                         break;  //RET C
         case 0xD9:  cpctl->exx();                                                                       break;  //EXX
-        case 0xDA:  z->PC(cpctl->jp(z->CF(), z->getX16(is[1], is[2])));                                 break;  //JP C, **
+        case 0xDA:  z->PC(cpctl->jp(z->CF(), z->getX16(is[2], is[1])));                                 break;  //JP C, **
         case 0xDB:  log->logUnimplemented(op);                                                          break;  //IN A, (*)
-        case 0xDC:  z->PC(cpctl->call(z->CF(), z->getX16(is[1], is[2])));                               break;  //CALL C, **
+        case 0xDC:  z->PC(cpctl->call(z->CF(), z->getX16(is[2], is[1])));                               break;  //CALL C, **
         //   0xDD:  ON THIS POSITION THE SWITCH TO THE IX INSTRUCTIONS HAPPENS!!!
         case 0xDE:  z->A(idas->sbc(z->A(), is[1]));                                                     break;  //SBC A, *
         case 0xDF:  cpctl->rst(0x18);                                                                   break;  //RST 18h
 
         //case 0xE0:  z->PC(cpctl->ret(!z->PVF()));                                                       break;  //RET PO        ??      nPV     ??
         //case 0xE1:  z->HL(cpctl->pop());                                                                break;  //POP HL
-        //case 0xE2:  z->PC(cpctl->jp(!z->PVF(), z->getX16(is[1], is[2])));                               break;  //JP PO, **     ??      nPV     ??
+        //case 0xE2:  z->PC(cpctl->jp(!z->PVF(), z->getX16(is[2], is[1])));                               break;  //JP PO, **     ??      nPV     ??
         case 0xE3:  log->logUnimplemented(op);                                                          break;  //EX (SP), HL
-        //case 0xE4:  z->PC(cpctl->call(!z->PVF(), z->getX16(is[1], is[2])));                             break;  //CALL PO, **   ??      nPV     ??
+        //case 0xE4:  z->PC(cpctl->call(!z->PVF(), z->getX16(is[2], is[1])));                             break;  //CALL PO, **   ??      nPV     ??
         case 0xE5:  cpctl->push(z->HL());                                                               break;  //PUSH HL
         case 0xE6:  z->A(arit->AND(z->A(), is[1]));                                                     break;  //AND *
         case 0xE7:  cpctl->rst(0x20);                                                                   break;  //RST 20h
         //case 0xE8:  z->PC(cpctl->ret(z->PVF()));                                                        break;  //RET PE        ??      PV      ??
         case 0xE9:  z->PC(cpctl->jp(true, z->mM->getX16(z->HL())));                                     break;  //JP (HL)
-        //case 0xEA:  z->PC(cpctl->jp(z->PVF(), z->getX16(is[1], is[2])));                                break;  //JP PE, **     ??      PV      ??
+        //case 0xEA:  z->PC(cpctl->jp(z->PVF(), z->getX16(is[2], is[1])));                                break;  //JP PE, **     ??      PV      ??
         case 0xEB:  log->logUnimplemented(op);                                                          break;  //EX DE, HL
-        //case 0xEC:  z->PC(cpctl->call(z->PVF(), z->getX16(is[1], is[2])));                              break;  //CALL PE, **   ??      PV      ??
+        //case 0xEC:  z->PC(cpctl->call(z->PVF(), z->getX16(is[2], is[1])));                              break;  //CALL PE, **   ??      PV      ??
         //   0xED:  ON THIS POSITION THE SWITCH TO THE EXTD INSTRUCTIONS HAPPENS!!!
         case 0xEE:  z->A(arit->XOR(z->A(), is[1]));                                                     break;  //XOR *
         case 0xEF:  cpctl->rst(0x28);                                                                   break;  //RST 28h
 
         //case 0xF0:  z->PC(cpctl->ret(!z->PVF()));                                                       break;  //RET P        ??      nPV     ??
         //case 0xF1:  z->HL(cpctl->pop());                                                                break;  //POP AF
-        //case 0xF2:  z->PC(cpctl->jp(!z->PVF(), z->getX16(is[1], is[2])));                               break;  //JP P, **     ??      nPV     ??
+        //case 0xF2:  z->PC(cpctl->jp(!z->PVF(), z->getX16(is[2], is[1])));                               break;  //JP P, **     ??      nPV     ??
         //case 0xF3:  log->logUnimplemented(op);                                                          break;  //EX (SP), HL
-        //case 0xF4:  z->PC(cpctl->call(!z->PVF(), z->getX16(is[1], is[2])));                             break;  //CALL P, **   ??      nPV     ??
+        //case 0xF4:  z->PC(cpctl->call(!z->PVF(), z->getX16(is[2], is[1])));                             break;  //CALL P, **   ??      nPV     ??
         //case 0xF5:  cpctl->push(z->AF());                                                               break;  //PUSH AF
         case 0xF6:  z->A(arit->OR(z->A(), is[1]));                                                      break;  //OR *
         case 0xF7:  cpctl->rst(0x30);                                                                   break;  //RST 30h
         //case 0xF8:  z->PC(cpctl->ret(z->PVF()));                                                        break;  //RET M        ??      PV      ??
         case 0xF9:  z->SP(z->HL());                                                                     break;  //LD SP, HL
-        //case 0xFA:  z->PC(cpctl->jp(z->PVF(), z->getX16(is[1], is[2])));                                break;  //JP PM, **     ??      PV      ??
+        //case 0xFA:  z->PC(cpctl->jp(z->PVF(), z->getX16(is[2], is[1])));                                break;  //JP PM, **     ??      PV      ??
         //case 0xFB:  log->logUnimplemented(op);                                                          break;  //EI
-        //case 0xFC:  z->PC(cpctl->call(z->PVF(), z->getX16(is[1], is[2])));                              break;  //CALL M, **   ??      PV      ??
+        //case 0xFC:  z->PC(cpctl->call(z->PVF(), z->getX16(is[2], is[1])));                              break;  //CALL M, **   ??      PV      ??
         //   0xFD:  ON THIS POSITION THE SWITCH TO THE IY INSTRUCTIONS HAPPENS!!!
         case 0xFE:  arit->CP(z->A(), is[1]);                                                            break;  //CP *
         case 0xFF:  cpctl->rst(0x38);                                                                   break;  //RST 38h
