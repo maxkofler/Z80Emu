@@ -25,6 +25,7 @@ private:
     Rotate* rot;
     Bit* bit;
 
+    uint8_t* cycles;
 };
 
 #endif
