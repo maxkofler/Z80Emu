@@ -17,7 +17,7 @@ uint16_t CPUctl::jr(bool c, uint8_t off){
     if (c){
         char offset = off;
         uint16_t nPC = z80->PC() + offset;
-        log->log("CPUctl-jr()", "Calculated offset: " + std::to_string(offset) + ", new PC (estimated):" + std::to_string(nPC), Log::D3);
+        log->log("CPUctl-jr()", "Calculated offset: " + std::to_string(offset) + ", new PC (estimated)=" + Log::toHexString(nPC), Log::D3);
         return nPC; 
     }
 }
