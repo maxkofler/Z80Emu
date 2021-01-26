@@ -56,9 +56,9 @@ public:
     void H(uint8_t v){this->rH = v;}
     void L(uint8_t v){this->rL = v;}
 
-    uint16_t BC(){return this->getX16(this->rC, this->rB);}
-    uint16_t DE(){return this->getX16(this->rE, this->rD);}
-    uint16_t HL(){return this->getX16(this->rL, this->rH);}
+    uint16_t BC(){return this->getX16(this->rB, this->rC);}
+    uint16_t DE(){return this->getX16(this->rD, this->rE);}
+    uint16_t HL(){return this->getX16(this->rH, this->rL);}
 
     void BC(uint16_t);
     void DE(uint16_t);

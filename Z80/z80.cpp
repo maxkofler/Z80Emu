@@ -14,18 +14,18 @@ uint16_t Z80::getX16(uint8_t h, uint8_t l){
 }
 
 void Z80::BC(uint16_t v){
-    this->rB = v & 0x00FF;  //LOW
-    this->rC = v >> 8;      //HIGH
+    this->rC = v & 0x00FF;  //LOW
+    this->rB = v >> 8;      //HIGH
 }
 
 void Z80::DE(uint16_t v){
-    this->rD = v & 0x00FF;  //LOW
-    this->rE = v >> 8;      //HIGH
+    this->rE = v & 0x00FF;  //LOW
+    this->rD = v >> 8;      //HIGH
 }
 
 void Z80::HL(uint16_t v){
-    this->rH = v & 0x00FF;  //LOW
-    this->rL = v >> 8;      //HIGH
+    this->rL = v & 0x00FF;  //LOW
+    this->rH = v >> 8;      //HIGH
 }
 
 void Z80::logState(){

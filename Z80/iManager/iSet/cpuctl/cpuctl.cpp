@@ -9,6 +9,8 @@ CPUctl::CPUctl(Z80* z80, Log* log){
 uint16_t CPUctl::jp(bool c, uint16_t pos){
     if (c){
         return pos;
+    }else{
+        return z80->PC();
     }
 }
 
@@ -19,14 +21,26 @@ uint16_t CPUctl::jr(bool c, uint8_t off){
         uint16_t nPC = z80->PC() + offset;
         log->log("CPUctl-jr()", "Calculated offset: " + std::to_string(offset) + ", new PC (estimated)=" + Log::toHexString(nPC), Log::D3);
         return nPC; 
+    }else{
+        return z80->PC();
     }
 }
 
 uint16_t CPUctl::call(bool c, uint16_t pos){
-    return 0;
+    if (c){
+        push(z80->PC());
+        return pos;
+    }else{
+        return z80->PC();
+    }
+    
 }
 uint16_t CPUctl::ret(bool c){
-    return 0;
+    if (c){
+        return pop();
+    }else{
+        return z80->PC();
+    }
 }
 
 
@@ -36,20 +50,22 @@ void CPUctl::push(uint16_t v){
     uint8_t high = v >> 8;
 
     z80->SP(z80->SP()-1);
-    z80->mM->set(z80->SP(), low);
-    z80->SP(z80->SP()-1);
     z80->mM->set(z80->SP(), high);
+    z80->SP(z80->SP()-1);
+    z80->mM->set(z80->SP(), low);
 }
 uint16_t CPUctl::pop(){
-    uint8_t high = z80->mM->get(z80->SP());
-    z80->SP(z80->SP()+1);
     uint8_t low = z80->mM->get(z80->SP());
+    z80->SP(z80->SP()+1);
+    uint8_t high = z80->mM->get(z80->SP());
     z80->SP(z80->SP()+1);
     return z80->getX16(high, low);
 }
 
 void CPUctl::rst(uint8_t nv){
-
+    push(z80->PC());
+    z80->PC(nv);
+    log->log("CPUctl::rst()", "This instruction is not verified! Use it with care!", Log::W);
 }
 
 void CPUctl::ex(uint8_t* reg1a, uint8_t* reg2a, uint8_t* reg1b, uint8_t* reg2b){
