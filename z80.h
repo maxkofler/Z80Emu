@@ -102,6 +102,8 @@ public:
 
     uint16_t getX16(uint8_t, uint8_t);
 
+    bool getEvenParity(uint8_t reg);
+
     void logState();
 
 private:
