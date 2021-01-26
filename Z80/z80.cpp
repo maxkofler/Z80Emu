@@ -13,6 +13,14 @@ uint16_t Z80::getX16(uint8_t h, uint8_t l){
     return (h << 8) | (l & 0xff);
 }
 
+bool Z80::getEvenParity(uint8_t reg){
+    uint8_t count = 0;
+    for(int i = 0; i < 32; i++){
+        if(reg & (1 << i)){ count++; }
+    }
+    return count%2;
+}
+
 void Z80::BC(uint16_t v){
     this->rC = v & 0x00FF;  //LOW
     this->rB = v >> 8;      //HIGH
