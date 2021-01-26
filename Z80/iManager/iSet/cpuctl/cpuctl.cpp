@@ -19,6 +19,7 @@ uint16_t    CPUctl::jr      (bool c, uint8_t off){
         char offset = off;
         uint16_t nPC = z80->PC() + offset;
         log->log("CPUctl-jr()", "Calculated offset: " + std::to_string(offset) + ", new PC (estimated):" + std::to_string(nPC), Log::D3);
+        return nPC; 
     }
 }
 
@@ -59,5 +60,7 @@ void        CPUctl::ex      (uint8_t* reg1a, uint8_t* reg2a, uint8_t* reg1b, uin
     *reg2b = a2;
 }
 void        CPUctl::exx     (){
-
+    ex(z80->pB(), z80->pC(), z80->pBx(), z80->pCx());
+    ex(z80->pD(), z80->pE(), z80->pDx(), z80->pEx());
+    ex(z80->pH(), z80->pL(), z80->pHx(), z80->pLx());
 }

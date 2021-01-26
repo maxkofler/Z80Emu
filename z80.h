@@ -40,6 +40,14 @@ public:
     uint8_t* pH(){return &this->rH;}
     uint8_t* pL(){return &this->rL;}
 
+    uint8_t* pAx(){return &this->rAx;}
+    uint8_t* pBx(){return &this->rBx;}
+    uint8_t* pCx(){return &this->rCx;}
+    uint8_t* pDx(){return &this->rDx;}
+    uint8_t* pEx(){return &this->rEx;}
+    uint8_t* pHx(){return &this->rHx;}
+    uint8_t* pLx(){return &this->rLx;}
+
     void A(uint8_t v){this->rA = v;}
     void B(uint8_t v){this->rB = v;}
     void C(uint8_t v){this->rC = v;}
