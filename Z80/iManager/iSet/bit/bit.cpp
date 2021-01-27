@@ -12,15 +12,19 @@ void Bit::bit(uint8_t pos, uint16_t reg){
 }
 
 uint8_t Bit::res(uint8_t pos, uint8_t reg){
-    return 0;
+    //No flags affected
+    return reg &= ~(1 << pos);
 }
 uint16_t Bit::res(uint8_t pos, uint16_t reg){
-    return 0;
+    //No flags affected
+    return reg &= ~(1 << pos);
 }
 
 uint8_t Bit::set(uint8_t pos, uint8_t reg){
-    return 0;
+    //No flags affected
+    return reg |= (1 << pos);
 }
 uint16_t Bit::set(uint8_t pos, uint16_t reg){
-    return 0;
+    //No flags affected
+    return reg |= (1 << pos);
 }
