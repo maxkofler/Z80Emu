@@ -2,4 +2,9 @@
 *.json*
 *.o
 *.hex*
+.vscode/
 build/
+Makefile
+CMakeFiles
+CMakeCache.txt
+*.cmake
