@@ -4,11 +4,19 @@
 #include <iostream>
 #include <string>
 
-int main(){
+int main(int argc, char** argv){
     using namespace std;
     
     Z80 z80(Log::D3);
-    z80.mM->loadProgFromFile("prog.hex", 0x1000);
+
+    if (argc == 2){
+        cout << "Loading program from \"" << argv[1] << "\"" << endl;
+        z80.mM->loadProgFromFile(argv[1], 0x1000);
+    }else{
+        cout << "Loading program from default \"prog.hex\"" << endl;
+        z80.mM->loadProgFromFile("prog.hex", 0x1000);
+    }
+    
     z80.mM->setROM(0x2000, 0x2010);
 
     bool run = true;
@@ -32,11 +40,11 @@ int main(){
                 z80.logState();
                 z80.iManager->finalizeIS(is);
             }else{
-                cout << "Processor is in halt state! Type PC to enter new start address!" << endl;
+                cout << "Processor is in halt state! Type PC to enter new start address" << endl;
             }
             
 
-        }else if (command == "PC"){
+        }else if (command == "pc"){
             cout << "PC(hex)=";
             cin >> command;
             z80.PC(stoul(command, nullptr, 16));
@@ -46,17 +54,21 @@ int main(){
         
         
         
-        else if (command == "exit"){
+        else if (command == "exit" || command == "q"){
             run = false;
         }
         
         else if (command == "halt"){
             z80.HALT(true);
-            cout << "Set processor to HALT state!" << endl;
+            cout << "Set processor to HALT state" << endl;
+        }
+
+        else if (command == "state"){
+            z80.logState();
         }
         
         else{
-            cout << "Command not found!" << endl;
+            cout << "Command not found" << endl;
         }
     }
     
