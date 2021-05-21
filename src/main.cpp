@@ -46,9 +46,16 @@ int main(){
         
         
         
-        else if (command == "quit"){
+        else if (command == "exit"){
             run = false;
-        }else{
+        }
+        
+        else if (command == "halt"){
+            z80.HALT(true);
+            cout << "Set processor to HALT state!" << endl;
+        }
+        
+        else{
             cout << "Command not found!" << endl;
         }
     }
