@@ -6,8 +6,8 @@ class ISet;
 #include "../../z80.h"
 #include "../../log/log.h"
 
-#include "MAINIS/mainIs.h"
-#include "BIT/bitIS.h"
+#include "../../instructions/MAINIS/mainIs.h"
+#include "../../instructions/BIT/bitIS.h"
 
 #include <stdint.h>
 

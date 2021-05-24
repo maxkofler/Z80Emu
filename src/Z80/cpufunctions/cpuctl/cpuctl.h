@@ -3,8 +3,8 @@
 
 class CPUctl;
 
-#include "../../../log/log.h"
-#include "../../../z80.h"
+#include "../../log/log.h"
+#include "../../z80.h"
 
 class CPUctl{
 public:

@@ -3,13 +3,13 @@
 
 class MainIS;
 
-#include "../../../z80.h"
-#include "../../../log/log.h"
+#include "../../z80.h"
+#include "../../log/log.h"
 
-#include "../rotate/rotate.h"
-#include "../arithmetic/arithmetic.h"
-#include "../incdecaddsub/incdecaddsub.h"
-#include "../cpuctl/cpuctl.h"
+#include "../../cpufunctions/rotate/rotate.h"
+#include "../../cpufunctions/arithmetic/arithmetic.h"
+#include "../../cpufunctions/incdecaddsub/incdecaddsub.h"
+#include "../../cpufunctions/cpuctl/cpuctl.h"
 
 #include <stdint.h>
 

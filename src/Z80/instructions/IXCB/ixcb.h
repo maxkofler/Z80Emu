@@ -3,11 +3,11 @@
 
 class IXCB;
 
-#include "../../../log/log.h"
-#include "../../../z80.h"
+#include "../../log/log.h"
+#include "../../z80.h"
 
-#include "../rotate/rotate.h"
-#include "../bit/bit.h"
+#include "../../cpufunctions/rotate/rotate.h"
+#include "../../cpufunctions/bit/bit.h"
 
 class IXCB{
 
