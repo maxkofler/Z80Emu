@@ -15,9 +15,14 @@ public:
 
     uint8_t                     getLastByte();
 
+    void                        setCycles(uint8_t c){this->_cycles = c;}
+
+    uint8_t                     getCycles(){return this->_cycles;}
+
     size_t                      size(){return this->_instruction.size();}
 private:
     std::vector<uint8_t>        _instruction;
+    uint8_t                     _cycles;
 };
 
 #endif

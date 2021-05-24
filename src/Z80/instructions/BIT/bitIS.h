@@ -6,24 +6,30 @@ class BitIS;
 #include "../../log/log.h"
 #include "../../z80.h"
 
+#include "../../cpu/instruction/instruction.h"
+
 #include "../../cpufunctions/rotate/rotate.h"
 #include "../../cpufunctions/bit/bit.h"
 
 class BitIS{
 public:
     BitIS(Z80* z80);
+    ~BitIS();
 
-    void exec(uint8_t opcode);          //These instructions don't have any operands!
+    void                                fetch(Instruction&);
 
-    uint8_t getCycles(uint8_t);
+    void                                exec(Instruction);
+
+    uint8_t                             getCycles(Instruction);
 
 private:
-    Z80* z;
+    Z80*                                z;
 
-    Rotate* rot;
-    Bit* bit;
+    Rotate*                             rot;
+    Bit*                                bit;
 
-    uint8_t* cycles;
+    void                                p_fillArrays();
+    uint8_t*                            _opCycles;
 };
 
 #endif

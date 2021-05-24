@@ -17,17 +17,11 @@ class ISet{
 public:
     ISet(Z80*);
 
-    //To get how many bytes of operators this IS needs
-    uint8_t                 getOPBytes(uint8_t);
-
     //New function to fetch all the instruction data from memory
     Instruction             fetchInstruction(uint8_t opcode);
 
     //Execute the instruction specified
     void                    execIS(Instruction is);
-
-    //Get how many CPU cycles the IS needed
-    uint8_t                 getISCycles(uint8_t);
 
 private:
     Z80* z80;

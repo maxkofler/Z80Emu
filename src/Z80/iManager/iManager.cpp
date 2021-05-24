@@ -23,7 +23,7 @@ Instruction IManager::fetchIS(){
 void IManager::execIS(Instruction is){
     FUN();
     this->iSet->execIS(is);
-    this->z80->addCycles(this->iSet->getISCycles(is[0]));
+    this->z80->addCycles(is.getCycles());
 }
 
 void IManager::logIS(Instruction is){

@@ -8,8 +8,13 @@ Instruction ISet::fetchInstruction(uint8_t opcode){
 
     switch(opcode){
         
+        case 0xcb:
+            LOGI("Fetching using BIT instruction set");
+            this->bitIS->fetch(newInstruction);
+            break;
+
         default:
-            LOGI("Using main instruction set");
+            LOGI("Fetching using MAIN instruction set");
             this->mainIS->fetch(newInstruction);
             break;
     }
