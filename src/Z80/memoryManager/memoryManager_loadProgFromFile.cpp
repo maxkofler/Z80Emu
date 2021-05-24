@@ -11,7 +11,7 @@ uint16_t MemoryManager::loadProgFromFile(std::string path, uint16_t initpos){
         uint16_t pos = initpos;
         while (!file.eof() && file.good()){
             this->memory[pos] = file.get();
-            LOGD(Log::toHexString(pos) + "->" + Log::toHexString(memory[pos]));
+            LOGF("[" + Log::toHexString(pos) + "] < " + Log::toHexString(memory[pos]));
             pos++;
         }
         return pos;

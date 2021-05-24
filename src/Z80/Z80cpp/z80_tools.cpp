@@ -1,42 +1,19 @@
-#include "z80.h"
-
-Z80::Z80(){
-    this->mM = new MemoryManager();
-    this->iManager = new IManager(this);
-
-    this->cycles = 0;
-}
-
-Z80::~Z80(){
-    delete this->mM;
-    delete this->iManager;
-}
+#include "../z80.h"
 
 uint16_t Z80::getX16(uint8_t h, uint8_t l){
+    FUN();
+
     return (h << 8) | (l & 0xff);
 }
 
 bool Z80::getEvenParity(uint8_t reg){
+    FUN();
+    
     uint8_t count = 0;
     for(int i = 0; i < 32; i++){
         if(reg & (1 << i)){ count++; }
     }
     return count%2;
-}
-
-void Z80::BC(uint16_t v){
-    this->rC = v & 0x00FF;  //LOW
-    this->rB = v >> 8;      //HIGH
-}
-
-void Z80::DE(uint16_t v){
-    this->rE = v & 0x00FF;  //LOW
-    this->rD = v >> 8;      //HIGH
-}
-
-void Z80::HL(uint16_t v){
-    this->rL = v & 0x00FF;  //LOW
-    this->rH = v >> 8;      //HIGH
 }
 
 void Z80::logState(){
