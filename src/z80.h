@@ -19,7 +19,7 @@ class MemoryManager;
 class Z80{
     
 public:
-    Z80(int);
+    Z80();
 
     MemoryManager* mM;
     IManager* iManager;

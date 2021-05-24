@@ -1,7 +1,6 @@
 #include "../z80.h"
 
-Z80::Z80(int logLevel){
-    this->log = new Log(logLevel);
+Z80::Z80(){
     this->mM = new MemoryManager(this->log);
     this->iManager = new IManager(this, this->log);
 
@@ -39,11 +38,11 @@ void Z80::HL(uint16_t v){
 void Z80::logState(){
     using namespace std;
     cout << endl;
-    cout << "A=" << Log::toHexString(rA) << " = " << Log::toBinString(rA) << "\t";
+    cout << "A=" << Log::toHexString(rA) << " = " << Log::toBinString8(rA) << "\t";
     cout << "S=" << Sf << " Z=" << Zf << " H=" << Hf << " PV=" << PVf << " N=" << Nf << " C=" << Cf << endl;
-    cout << "B=" << Log::toHexString(rB) << " = " << Log::toBinString(rB) << "\t C=" << Log::toHexString(rC) << " = " << Log::toBinString(rC) << endl;
-    cout << "D=" << Log::toHexString(rD) << " = " << Log::toBinString(rD) << "\t E=" << Log::toHexString(rE) << " = " << Log::toBinString(rE) << endl;
-    cout << "H=" << Log::toHexString(rH) << " = " << Log::toBinString(rH) << "\t L=" << Log::toHexString(rL) << " = " << Log::toBinString(rL) << endl;
+    cout << "B=" << Log::toHexString(rB) << " = " << Log::toBinString8(rB) << "\t C=" << Log::toHexString(rC) << " = " << Log::toBinString8(rC) << endl;
+    cout << "D=" << Log::toHexString(rD) << " = " << Log::toBinString8(rD) << "\t E=" << Log::toHexString(rE) << " = " << Log::toBinString8(rE) << endl;
+    cout << "H=" << Log::toHexString(rH) << " = " << Log::toBinString8(rH) << "\t L=" << Log::toHexString(rL) << " = " << Log::toBinString8(rL) << endl;
 
     cout << "PC=" << Log::toHexString(rPC) << "\tSP=" << Log::toHexString(rSP) << "\tCycles=" << cycles <<endl;
     cout << endl;
