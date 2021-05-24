@@ -1,0 +1,10 @@
+git clone https://github.com/maxkofler/Z80Emu
+cd Z80Emu
+mkdir build
+cd build
+	#Cross compiling for Windows using mingw:
+	cmake -D CMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++ ..
+	#else
+	cmake ..
+make -j [your ammount of cores]
+./Z80Emu.out
