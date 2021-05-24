@@ -28,7 +28,7 @@ int main(int argc, char** argv){
     bool run = true;
     string command;
 
-    uint8_t* is;
+    Instruction is;
 
     z80.PC(0x1000);
     z80.logState();

@@ -7,6 +7,7 @@
 class IManager;
 class Z80;
 
+#include "../cpu/instruction/instruction.h"
 #include "iSet/iSet.h"
 #include "../z80.h"
 #include "../log/log.h"
@@ -16,11 +17,11 @@ class IManager{
 public:
     IManager(Z80*);
 
-    uint8_t* fetchIS();
-    void execIS(uint8_t*);
-    void finalizeIS(uint8_t*);
+    Instruction                     fetchIS();
+    void                            execIS(Instruction is);
+    void                            finalizeIS(Instruction is);
 
-    void logIS(uint8_t*);
+    void                            logIS(Instruction is);
 
 private:
     bool ISLoaded;

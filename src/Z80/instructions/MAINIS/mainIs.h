@@ -6,6 +6,8 @@ class MainIS;
 #include "../../z80.h"
 #include "../../log/log.h"
 
+#include "../../cpu/instruction/instruction.h"
+
 #include "../../cpufunctions/rotate/rotate.h"
 #include "../../cpufunctions/arithmetic/arithmetic.h"
 #include "../../cpufunctions/incdecaddsub/incdecaddsub.h"
@@ -16,8 +18,13 @@ class MainIS;
 class MainIS{
 public:
     MainIS(Z80*);
-    uint8_t getCycles(uint8_t);
-    void exec(uint8_t* is);
+
+    //Fetches the operands for the provided opcode
+    void                        fetch(Instruction& instruction);
+
+    
+    uint8_t                     getCycles(uint8_t);
+    void                        exec(Instruction is);
 
 private:
     IncDecAddSub* idas;
@@ -27,7 +34,10 @@ private:
 
     Z80* z;
 
-    uint8_t* cycles;
+    void                        p_fillArrays();
+
+    uint8_t*                    _opBytes;
+    uint8_t*                    _opCycles;
 };
 
 #endif
