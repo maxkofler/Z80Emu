@@ -14,7 +14,10 @@ int main(int argc, char** argv){
         z80.mM->loadProgFromFile(argv[1], 0x1000);
     }else{
         cout << "Loading program from default \"prog.hex\"" << endl;
-        z80.mM->loadProgFromFile("prog.hex", 0x1000);
+        if (z80.mM->loadProgFromFile("prog.hex", 0x1000) == 0){
+            cout << "Error in loading program!" << endl;
+            return 0;
+        }
     }
     
     z80.mM->setROM(0x2000, 0x2010);
@@ -31,7 +34,7 @@ int main(int argc, char** argv){
         cout << ">";
         cin >> command;
 
-        if (command == "is"){
+        if (command == "is" || command == "i"){
 
             if (!z80.HALT()){
                 is = z80.iManager->fetchIS(); 
