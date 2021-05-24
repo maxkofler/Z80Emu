@@ -20,8 +20,6 @@ public:
 
     void                                exec(Instruction);
 
-    uint8_t                             getCycles(Instruction);
-
 private:
     Z80*                                z;
 

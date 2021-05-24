@@ -19,11 +19,10 @@ class MainIS{
 public:
     MainIS(Z80*);
 
-    //Fetches the operands for the provided opcode
+    //Fetches the operands for the provided instruction
     void                        fetch(Instruction& instruction);
 
-    
-    uint8_t                     getCycles(uint8_t);
+    //Executes the provided instruction
     void                        exec(Instruction is);
 
 private:
