@@ -51,7 +51,7 @@
 
 class MemoryManager{
 public:
-    MemoryManager(Log*);
+    MemoryManager();
 
     void setROM(uint16_t, uint16_t);
 
@@ -64,7 +64,6 @@ public:
     bool setX16(uint16_t, uint16_t);
 
 private:
-    Log* log;
     uint8_t* memory;
 
     bool isROM;

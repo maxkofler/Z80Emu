@@ -14,7 +14,7 @@ class ISet;
 class ISet{
 
 public:
-    ISet(Z80*, Log*);
+    ISet(Z80*);
 
     //To get how many bytes of operators this IS needs
     uint8_t getOPBytes(uint8_t);
@@ -27,7 +27,6 @@ public:
 
 private:
     Z80* z80;
-    Log* log;
 
     MainIS* mainIS;
     BitIS* bitIS;

@@ -11,7 +11,7 @@ class BitIS;
 
 class BitIS{
 public:
-    BitIS(Z80* z80, Log* log);
+    BitIS(Z80* z80);
 
     void exec(uint8_t opcode);          //These instructions don't have any operands!
 
@@ -19,7 +19,6 @@ public:
 
 private:
     Z80* z;
-    Log* log;
 
     Rotate* rot;
     Bit* bit;

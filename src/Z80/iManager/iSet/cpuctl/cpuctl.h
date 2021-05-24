@@ -8,7 +8,7 @@ class CPUctl;
 
 class CPUctl{
 public:
-    CPUctl(Z80*, Log* log);
+    CPUctl(Z80*);
 
     //If condition is true, ** wil be returned and so copied into PC
     uint16_t    jp      (bool condition, uint16_t position);
@@ -44,8 +44,6 @@ public:
 
 private:
     Z80* z80;
-    Log* log;
-
 };
 
 #endif

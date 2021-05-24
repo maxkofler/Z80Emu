@@ -14,7 +14,7 @@ class Z80;
 class IManager{
 
 public:
-    IManager(Z80*, Log*);
+    IManager(Z80*);
 
     uint8_t* fetchIS();
     void execIS(uint8_t*);
@@ -27,7 +27,6 @@ private:
     uint8_t opcode;
     ISet* iSet;
     Z80* z80;
-    Log* log;
 };
 
 #endif

@@ -1,10 +1,10 @@
 #include "iSet.h"
 
-ISet::ISet(Z80* z80, Log* log){
+ISet::ISet(Z80* z80){
+    FUN();
     this->z80 = z80;
-    this->log = log;
-    this->mainIS = new MainIS(this->z80, this->log);
-    this->bitIS = new BitIS(this->z80, this->log);
+    this->mainIS = new MainIS(this->z80);
+    this->bitIS = new BitIS(this->z80);
 
 
     this->opBytes = new uint8_t[256] {
@@ -31,53 +31,57 @@ ISet::ISet(Z80* z80, Log* log){
 }
 
 uint8_t ISet::getOPBytes(uint8_t opcode){
+    FUN();
     //0xCB  bit instructions
     //0xDD  IX  instructions
     //0xED  EXT instructions
     //0xFD  IY  instructions
 
     if (opcode == 0xCB){
-        log->log("ISet::getOPBytes()", "Switching to BIT instructions (1 additional byte as operand)", Log::D3);
+        LOGD("Switching to BIT instructions (1 additional byte as operand)");
         return 1;
     }
     else if (opcode == 0xDD){
-        log->log("ISet::getOPBytes()", "Switching to IX instructions (not included yet!)", Log::D3);
+        LOGD("Switching to IX instructions (not included yet!)");
         return 0;
     }
     else if (opcode == 0xED){
-        log->log("ISet::getOPBytes()", "Switching to EXT instructions (not included yet!)", Log::D3);
+        LOGD("Switching to EXT instructions (not included yet!)");
         return 0;
     }
     else if (opcode == 0xFD){
-        log->log("ISet::getOPBytes()", "Switching to IY instructions (not included yet!)", Log::D3);
+        LOGD("Switching to IY instructions (not included yet!)");
         return 0;
     }
     else{
-        log->log("Iset::getOPBytes()", "Using main instruction set!", Log::D3);
+        LOGD("Using main instruction set!");
         return this->opBytes[opcode];
     }
     
 }
 
 void ISet::execIS(uint8_t* is){
+    FUN();
 
     if (is[0] == 0xCB){
-        log->log("ISet::execIS()", "Executing instruction from Bit instruction set!", Log::D3);
+        LOGD("Executing instruction from Bit instruction set!");
         this->bitIS->exec(is[1]);
     }
     else{
-        log->log("ISet::execIS()", "Executing instruction from Main instruction set!", Log::D3);
+        LOGD("Executing instruction from Main instruction set!");
         this->mainIS->exec(is);
     }
 }
 
 uint8_t ISet::getISCycles(uint8_t opcode){
+    FUN();
+    
     if (opcode == 0xCB){
-        log->log("ISet::getISCycles()", "Getting instruction cycles from Bit instruction set (" + Log::toHexString(opcode) + ")", Log::D3);
+        LOGD("Getting instruction cycles from Bit instruction set (" + Log::toHexString(opcode) + ")");
         return this->bitIS->getCycles(opcode);
     }
     else{
-        log->log("ISet::getISCycles()", "Getting instruction cycles from Main instruction set (" + Log::toHexString(opcode) + ")", Log::D3);
+        LOGD("Getting instruction cycles from Main instruction set (" + Log::toHexString(opcode) + ")");
         return this->mainIS->getCycles(opcode);
     }
 }

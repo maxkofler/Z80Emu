@@ -21,6 +21,7 @@ extern Log* hlog;
 #define LOGI(text) hlog->log(text, Log::I);
 #define LOGD(text) hlog->log(text, Log::D);
 #define LOGF(text) hlog->log(text, Log::F);
+#define LOGMEM(text) hlog->log(text, Log::MEM);
 
 #define LOGSP(level) hlog->startProgress(level);
 #define LOGPP(text, level) hlog->printProgress(text, level);
@@ -48,7 +49,8 @@ public:
     const static int W = 6;
     const static int I = 7;
     const static int D = 8;
-    const static int F = 9;
+    const static int MEM = 9;
+    const static int F = 10;
 
     const static int FUNCALLS = 75;
     const static int A = 100;

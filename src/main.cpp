@@ -7,10 +7,10 @@
 Log* hlog;
 
 int main(int argc, char** argv){
-    hlog = new Log(Log::D, true);
+    hlog = new Log(Log::A, true);
     using namespace std;
     
-    Z80 z80();
+    Z80 z80;
 
     if (argc == 2){
         cout << "Loading program from \"" << argv[1] << "\"" << endl;

@@ -20,7 +20,6 @@ public:
 
 private:
     Z80* z;
-    Log* log;
 
     Rotate* rot;
     Bit* bit;

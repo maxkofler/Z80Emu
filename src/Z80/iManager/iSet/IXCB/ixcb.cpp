@@ -1,6 +1,8 @@
 #include "ixcb.h"
 
 IXCB::IXCB(Z80* z80){
+    FUN();
+
     this->z = z80;
 
     //  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  A,  B,  C,  D,  E,  F
@@ -28,11 +30,15 @@ IXCB::IXCB(Z80* z80){
 }
 
 uint8_t IXCB::getCycles(uint8_t op){
-    log->log("IXCB::getCycles()", "IS " + Log::toHexString(op) + " takes " + std::to_string(this->cycles[op]) + " cycles!", Log::D3);
+    FUN();
+
+    LOGD("IS " + Log::toHexString(op) + " takes " + std::to_string(this->cycles[op]) + " cycles!");
     return this->cycles[op];
 }
 
 void IXCB::exec(uint8_t* is){
+    FUN();
+
     uint8_t op = is[0];
     uint8_t o = is[1];
     uint16_t x = z->IX() + o;
@@ -310,6 +316,6 @@ void IXCB::exec(uint8_t* is){
         case 0xFE:  z->mM->set(x, bit->set(7, v));                                                      break;  //SET 7, (IX+*)
         case 0xFF:  z->A(bit->set(7, v));   z->mM->set(x, z->A());                                      break;  //SET 7, (IX+*), A
 
-        default:    log->logUnimplemented(op);                                                          break;  //Not implemented instructions
+        default:    LOGE("Unimplemented opcode: " + Log::toHexString(op));                              break;  //Not implemented instructions
     }
 }

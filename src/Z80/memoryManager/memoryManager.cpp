@@ -1,20 +1,21 @@
 #include "memoryManager.h"
-MemoryManager::MemoryManager(Log* log){
+MemoryManager::MemoryManager(){
     this->memory = new uint8_t[__UINT16_MAX__];
-    this->log = log;
     this->isROM = false;
 }
 
 void MemoryManager::setROM(uint16_t lowROM, uint16_t highROM){
+    FUN();
     this->isROM = true;
     this->lROM = lowROM;
     this->hROM = highROM;
-    log->log("MemoryManager::setROM()", "Marked " + Log::toHexString(lROM) + " - " + Log::toHexString(hROM) + " as ROM!", Log::D);
+    LOGI("Marked " + Log::toHexString(lROM) + " - " + Log::toHexString(hROM) + " as ROM!");
 }
 
 uint16_t MemoryManager::loadProgFromFile(std::string path, uint16_t initpos){
+    FUN();
     using namespace std;
-    log->log("MemoryManager::loadProgramFromFile()", "Reading program from file: " + path, Log::I);
+    LOGI("Reading program from file: " + path);
     ifstream file;
     file.open(path, ios::in);
     
@@ -22,39 +23,46 @@ uint16_t MemoryManager::loadProgFromFile(std::string path, uint16_t initpos){
         uint16_t pos = initpos;
         while (!file.eof() && file.good()){
             this->memory[pos] = file.get();
-            log->log("MemoryManager::loadProgFromFile()", Log::toHexString(pos) + "->" + Log::toHexString(memory[pos]), Log::D3);
+            LOGD(Log::toHexString(pos) + "->" + Log::toHexString(memory[pos]));
             pos++;
         }
         return pos;
     }else{
-        log->log("MemoryManager::loadProgramFromFile()", "Failed to open file " + path, Log::E);
+        LOGE("Failed to open file " + path);
         return 0;
     }
 }
 
 uint8_t MemoryManager::get(uint16_t pos){
-    log->log("MemoryManager::get()", "Read " + Log::toHexString(pos) + " -> [" + Log::toHexString(this->memory[pos]) + "]", Log::D3);
+    FUN();
+    LOGMEM("Read " + Log::toHexString(pos) + " -> [" + Log::toHexString(this->memory[pos]) + "]");
     return this->memory[pos];
 }
 
 uint16_t MemoryManager::getX16(uint16_t pos){
-    log->log("MemoryManager::get()", "Read (16) " + Log::toHexString(pos) + " -> [" + Log::toHexString(this->memory[pos]) + "-" + Log::toHexString(this->memory[pos+1]) + "]", Log::D3);
+    FUN();
+    LOGMEM( "Read (16) " + Log::toHexString(pos) + " -> [" + 
+            Log::toHexString(this->memory[pos]) + "-" + Log::toHexString(this->memory[pos+1]) + "]");
     return (get(pos+1) << 8 ) | (get(pos) & 0xff);
 }
 
 bool MemoryManager::set(uint16_t pos, uint8_t val){
+    FUN();
     if (this->isROM){
         if (pos >= this->lROM && pos <= this->hROM){
-            log->log("MemoryManager::set()", "Denied write to ROM at pos: " + Log::toHexString(pos) + " | " + Log::toHexString(val) + " -> [" + Log::toHexString(memory[pos]) + "]", Log::E);
+            LOGW(   "Denied write to ROM at pos: " + Log::toHexString(pos) + " | " + 
+                    Log::toHexString(val) + " -> [" + Log::toHexString(memory[pos]) + "]");
             return false;
         }
     }
-    log->log("MemoryManager::set()", "Writing(" + Log::toHexString(pos) + "): " + Log::toHexString(val) + " -> [" + Log::toHexString(memory[pos]) + "]", Log::D3);
+    LOGMEM( "Writing(" + Log::toHexString(pos) + "): " + Log::toHexString(val) + " -> [" + 
+            Log::toHexString(memory[pos]) + "]");
     this->memory[pos] = val;
     return true;
 }
 
 bool MemoryManager::setX16(uint16_t pos, uint16_t val){
+    FUN();
     uint8_t low = val & 0x00FF;
     uint8_t high = val >> 8;
 
@@ -64,23 +72,28 @@ bool MemoryManager::setX16(uint16_t pos, uint16_t val){
         bool ret = true;
         if (pos >= this->lROM && pos <= this->hROM){
             ret = false;
-            log->log("MemoryManager::setX16()", "Denied write to ROM at pos: " + Log::toHexString(pos) + " | " + Log::toHexString(low) + " -> [" + Log::toHexString(memory[pos]) + "]", Log::E);
+            LOGW(   "Denied write to ROM at pos: " + Log::toHexString(pos) + " | " + 
+                    Log::toHexString(low) + " -> [" + Log::toHexString(memory[pos]) + "]");
         }else{
-            log->log("MemoryManager::set()", "Writing(" + Log::toHexString(pos) + "): " + Log::toHexString(low) + " -> [" + Log::toHexString(memory[pos]) + "]", Log::D3);
+            LOGMEM( "Writing(" + Log::toHexString(pos) + "): " + Log::toHexString(low) + " -> [" + 
+                    Log::toHexString(memory[pos]) + "]");
             this->memory[pos] = low;
         }
 
         if (pos+1 >= this->lROM && pos+1 <= this->hROM){
             ret = false;
-            log->log("MemoryManager::setX16()", "Denied write to ROM at pos: " + Log::toHexString(pos+1) + " | " + Log::toHexString(low) + " -> [" + Log::toHexString(memory[pos+1]) + "]", Log::E);
+            LOGW(   "Denied write to ROM at pos: " + Log::toHexString(pos+1) + " | " + 
+                    Log::toHexString(low) + " -> [" + Log::toHexString(memory[pos+1]) + "]");
         }else{
-            log->log("MemoryManager::set()", "Writing(" + Log::toHexString(pos+1) + "): " + Log::toHexString(high) + " -> [" + Log::toHexString(memory[pos+1]) + "]", Log::D3);
+            LOGMEM( "Writing(" + Log::toHexString(pos+1) + "): " + Log::toHexString(high) + " -> [" +
+                    Log::toHexString(memory[pos+1]) + "]");
             this->memory[pos+1] = high;
         }
         return ret;
     }
 
-    log->log("MemoryManager::set()", "Writing(" + Log::toHexString(pos) + " - 16): " + Log::toHexString(val) + " -> [" + Log::toHexString(memory[pos]) + "]", Log::D3);
+    LOGMEM( "Writing(" + Log::toHexString(pos) + " - 16): " + Log::toHexString(val) + " -> [" + 
+            Log::toHexString(memory[pos]) + "]");
     this->memory[pos+1] = val >> 8;     // high byte
     this->memory[pos] = val & 0x00FF;   // low byte (0x34)
     return true;

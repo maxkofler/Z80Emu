@@ -1,6 +1,8 @@
 #include "iycb.h"
 
 IYCB::IYCB(Z80* z80){
+    FUN();
+
     this->z = z80;
 
     this->cycles = new uint8_t[256]{
@@ -26,7 +28,9 @@ IYCB::IYCB(Z80* z80){
 }
 
 uint8_t IYCB::getCycles(uint8_t op){
-    log->log("IYCB::getCycles()", "IS " + Log::toHexString(op) + " takes " + std::to_string(this->cycles[op]) + " cycles!", Log::D3);
+    FUN();
+
+    LOGD("IS " + Log::toHexString(op) + " takes " + std::to_string(this->cycles[op]) + " cycles!");
     return this->cycles[op];
 }
 
@@ -308,6 +312,6 @@ void IYCB::exec(uint8_t* is){
         case 0xFE:  z->mM->set(x, bit->set(7, v));                                                      break;  //SET 7, (IX+*)
         case 0xFF:  z->A(bit->set(7, v));   z->mM->set(x, z->A());  
 
-        default:    log->logUnimplemented(op);                                                          break;  //Not implemented instructions
+        default:    LOGE("Unimplemented opcode: " + Log::toHexString(op));                              break;  //Not implemented instructions
     }
 }

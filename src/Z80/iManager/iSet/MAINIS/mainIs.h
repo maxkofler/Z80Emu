@@ -15,7 +15,7 @@ class MainIS;
 
 class MainIS{
 public:
-    MainIS(Z80*, Log*);
+    MainIS(Z80*);
     uint8_t getCycles(uint8_t);
     void exec(uint8_t* is);
 
@@ -26,7 +26,6 @@ private:
     CPUctl* cpctl;
 
     Z80* z;
-    Log* log;
 
     uint8_t* cycles;
 };

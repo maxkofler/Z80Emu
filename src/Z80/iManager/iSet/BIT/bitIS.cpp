@@ -1,8 +1,7 @@
 #include "bitIS.h"
 
-BitIS::BitIS(Z80* z80, Log* log){
+BitIS::BitIS(Z80* z80){
     this->z = z80;
-    this->log = log;
     this->rot = new Rotate(this->z);
     this->bit = new Bit(this->z);
 
@@ -29,10 +28,14 @@ BitIS::BitIS(Z80* z80, Log* log){
 }
 
 uint8_t BitIS::getCycles(uint8_t op){
+    FUN();
+
     return this->cycles[op];
 }
 
 void BitIS::exec(uint8_t op){
+    FUN();
+
     switch(op){
         case 0x00:  z->B(rot->RLC(z->B()));                                                             break;  //RLC B
         case 0x01:  z->C(rot->RLC(z->C()));                                                             break;  //RLC C
@@ -306,6 +309,6 @@ void BitIS::exec(uint8_t op){
         case 0xFE:  z->mM->set(z->HL(), bit->set(7, z->mM->get(z->HL())));                              break;  //SET 7, (HL)
         case 0xFF:  z->A(bit->set(7, z->C()));                                                          break;  //SET 7, A
 
-        default:    log->logUnimplemented(op);                                                          break;  //Not implemented instructions
+        default:    LOGE("Unimplemented opcode: " + Log::toHexString(op));                              break;  //Not implemented instructions
     }
 }

@@ -1,8 +1,8 @@
 #include "../z80.h"
 
 Z80::Z80(){
-    this->mM = new MemoryManager(this->log);
-    this->iManager = new IManager(this, this->log);
+    this->mM = new MemoryManager();
+    this->iManager = new IManager(this);
 
     this->cycles = 0;
 }
