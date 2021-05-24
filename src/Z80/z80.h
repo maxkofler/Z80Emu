@@ -1,7 +1,3 @@
-/*
-    -----Z80-----
-*/
-
 #ifndef __Z80_H__
 #define __Z80_H__
 
@@ -12,14 +8,15 @@
 class IManager;
 class MemoryManager;
 
-#include "Z80/memoryManager/memoryManager.h"
-#include "Z80/iManager/iManager.h"
-#include "Z80/log/log.h"
+#include "memoryManager/memoryManager.h"
+#include "iManager/iManager.h"
+#include "log/log.h"
 
 class Z80{
     
 public:
     Z80();
+    ~Z80();
 
     MemoryManager* mM;
     IManager* iManager;

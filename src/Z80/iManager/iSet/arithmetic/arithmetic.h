@@ -2,7 +2,7 @@
 #define __ARITHMETIC_H__
 
 class Arithmetic;
-#include "../../../../z80.h"
+#include "../../../z80.h"
 #include "../incdecaddsub/incdecaddsub.h"
 #include <stdint.h>
 

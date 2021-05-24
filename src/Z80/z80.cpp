@@ -1,4 +1,4 @@
-#include "../z80.h"
+#include "z80.h"
 
 Z80::Z80(){
     this->mM = new MemoryManager();
@@ -7,6 +7,10 @@ Z80::Z80(){
     this->cycles = 0;
 }
 
+Z80::~Z80(){
+    delete this->mM;
+    delete this->iManager;
+}
 
 uint16_t Z80::getX16(uint8_t h, uint8_t l){
     return (h << 8) | (l & 0xff);

@@ -4,7 +4,7 @@
 class IXCB;
 
 #include "../../../log/log.h"
-#include "../../../../z80.h"
+#include "../../../z80.h"
 
 #include "../rotate/rotate.h"
 #include "../bit/bit.h"

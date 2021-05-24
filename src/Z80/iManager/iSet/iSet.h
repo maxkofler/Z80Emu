@@ -3,7 +3,7 @@
 
 class ISet;
 
-#include "../../../z80.h"
+#include "../../z80.h"
 #include "../../log/log.h"
 
 #include "MAINIS/mainIs.h"

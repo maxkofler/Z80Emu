@@ -3,7 +3,7 @@
 
 class MainIS;
 
-#include "../../../../z80.h"
+#include "../../../z80.h"
 #include "../../../log/log.h"
 
 #include "../rotate/rotate.h"

@@ -8,7 +8,7 @@ class IManager;
 class Z80;
 
 #include "iSet/iSet.h"
-#include "../../z80.h"
+#include "../z80.h"
 #include "../log/log.h"
 
 class IManager{
