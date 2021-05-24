@@ -37,9 +37,6 @@
         <-  true if value was written, false if position is marked as ROM
 */
 
-
-
-
 #ifndef __MEMORYMANAGER_H__
 #define __MEMORYMANAGER_H__
 
@@ -52,23 +49,27 @@
 class MemoryManager{
 public:
     MemoryManager();
+    ~MemoryManager();
 
-    void setROM(uint16_t, uint16_t);
+    void                    setROM(uint16_t lowROM, uint16_t highROM);
+    uint16_t                loadProgFromFile(std::string filename, uint16_t startPos);
 
-    uint16_t loadProgFromFile(std::string, uint16_t);
+    uint8_t                 get(uint16_t);
+    uint16_t                getX16(uint16_t);
 
-    uint8_t get(uint16_t);
-    uint16_t getX16(uint16_t);
-
-    bool set(uint16_t, uint8_t);
-    bool setX16(uint16_t, uint16_t);
+    bool                    set(uint16_t, uint8_t);
+    bool                    setX16(uint16_t, uint16_t);
 
 private:
-    uint8_t* memory;
+    //The array representing memory
+    uint8_t*                memory;
 
-    bool isROM;
-    uint16_t lROM;
-    uint16_t hROM;
+    //Is true when the current Memory Map contains a ROM area
+    bool                    isROM;
+    //Defines the lowest address of ROM
+    uint16_t                lROM;
+    //Defines the highest address of ROM
+    uint16_t                hROM;
 };
 
 #endif
