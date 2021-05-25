@@ -229,7 +229,7 @@ void MainIS::exec(Instruction is){
         case 0xD0:  z->PC(cpctl->ret(!z->CF()));                                                        break;  //RET NC
         case 0xD1:  z->DE(cpctl->pop());                                                                break;  //POP DE
         case 0xD2:  z->PC(cpctl->jp(!z->CF(), z->getX16(is[2], is[1])));                                break;  //JP NC, **
-        //case 0xD3:  log->logUnimplemented(op);                                                          break;  //OUT (*), A
+        case 0xD3:  z->ioManager->out(is[1], z->A());                                                   break;  //OUT (*), A
         case 0xD4:  z->PC(cpctl->call(!z->CF(), z->getX16(is[2], is[1])));                              break;  //CALL NC, **
         case 0xD5:  cpctl->push(z->DE());                                                               break;  //PUSH DE
         case 0xD6:  z->A(idas->sub(z->A(), is[1]));                                                     break;  //SUB *
@@ -237,7 +237,7 @@ void MainIS::exec(Instruction is){
         case 0xD8:  z->PC(cpctl->ret(z->CF()));                                                         break;  //RET C
         case 0xD9:  cpctl->exx();                                                                       break;  //EXX
         case 0xDA:  z->PC(cpctl->jp(z->CF(), z->getX16(is[2], is[1])));                                 break;  //JP C, **
-        //case 0xDB:  log->logUnimplemented(op);                                                          break;  //IN A, (*)
+        case 0xDB:  z->A(z->ioManager->in(is[1]));                                                      break;  //IN A, (*)
         case 0xDC:  z->PC(cpctl->call(z->CF(), z->getX16(is[2], is[1])));                               break;  //CALL C, **
         //   0xDD:  ON THIS POSITION THE SWITCH TO THE IX INSTRUCTIONS HAPPENS!!!
         case 0xDE:  z->A(idas->sbc(z->A(), is[1]));                                                     break;  //SBC A, *
