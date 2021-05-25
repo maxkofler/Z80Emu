@@ -1,7 +1,6 @@
 *.out
 *.json*
 *.o
-*.hex*
 .vscode/
 build/
 Makefile
