@@ -4,10 +4,11 @@
 class IOManager;
 
 #include "../../log/log.h"
+#include "../../z80.h"
 
 class IOManager{
 public:
-    IOManager();
+    IOManager(Z80*);
     ~IOManager();
 
     //Possible IO configurations
@@ -40,7 +41,20 @@ public:
      **/    
     uint8_t                     read(uint8_t addr);
 
+    /**
+     *  CPU INSTRUCTION
+     * 
+     *  Flags affected:     N(r)    PV(p)   H(r)    Z(d)    S(d)
+     **/
+    uint8_t                     in(uint8_t addr);
+
+    /**
+     * CPU INSTRUCTION
+     **/
+    bool                        out(uint8_t addr, uint8_t data);
+
 private:
+    Z80*                        z80;
 
     //Stores the config of the ports:
     //  0   IN
