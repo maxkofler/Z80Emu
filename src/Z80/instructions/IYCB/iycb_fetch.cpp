@@ -1,6 +1,6 @@
-#include "ixcb.h"
+#include "iycb.h"
 
-void IXCB::fetch(Instruction& is){
+void IYCB::fetch(Instruction& is){
     FUN();
 
     is.setCycles(this->_opCycles[is.getLastByte()]);
