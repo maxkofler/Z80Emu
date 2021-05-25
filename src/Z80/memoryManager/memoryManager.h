@@ -60,6 +60,13 @@ public:
     bool                    set(uint16_t, uint8_t);
     bool                    setX16(uint16_t, uint16_t);
 
+    /**
+     *  Writes directly to memory without checking for ROM
+     *  @arg    addr        The address to write to
+     *  @arg    data        The data to write
+     **/
+    void                    userWrite(uint16_t addr, uint8_t data);
+
 private:
     //The array representing memory
     uint8_t*                memory;

@@ -55,6 +55,7 @@ int main(int argc, char** argv){
             cin >> command;
             z80.PC(stoul(command, nullptr, 16));
             z80.HALT(false);
+            cout << endl;
             cout << "new PC = " << Log::toHexString(z80.PC()) << endl;
         }
         
@@ -65,6 +66,7 @@ int main(int argc, char** argv){
             cout << "mode(hex 0=IN, 1=OUT)= ";
             cin >> command;
             uint8_t mode = stoul(command, nullptr, 16);
+            cout << endl;
             z80.ioManager->config(port, mode);
         }
 
@@ -75,6 +77,7 @@ int main(int argc, char** argv){
             cout << "data(hex)= ";
             cin >> command;
             uint8_t data = stoul(command, nullptr, 16);
+            cout << endl;
             z80.ioManager->userWrite(port, data);
         }
 
@@ -82,7 +85,27 @@ int main(int argc, char** argv){
             cout << "port(hex)= ";
             cin >> command;
             uint8_t port = stoul(command, nullptr, 16);
+            cout << endl;
             z80.ioManager->read(port);
+        }
+
+        else if (command == "mempoke"){
+            cout << "address(hex16)= ";
+            cin >> command;
+            uint16_t addr = stoul(command, nullptr, 16);
+            cout << "data(hex8)= ";
+            cin >> command;
+            uint8_t data = stoul(command, nullptr, 16);
+            cout << endl;
+            z80.mM->userWrite(addr, data);
+        }
+
+        else if (command == "mempeek"){
+            cout << "address(hex16)= ";
+            cin >> command;
+            uint16_t addr = stoul(command, nullptr, 16);
+            cout << endl;
+            z80.mM->get(addr);
         }
         
         else if (command == "exit" || command == "q"){

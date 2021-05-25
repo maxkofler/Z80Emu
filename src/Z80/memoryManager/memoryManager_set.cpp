@@ -46,3 +46,10 @@ bool MemoryManager::set(uint16_t pos, uint8_t val){
     this->memory[pos] = val;
     return true;
 }
+
+void MemoryManager::userWrite(uint16_t addr, uint8_t data){
+    FUN();
+
+    LOGMEM( "MEM [" + Log::toHexString(addr) + "] < " + Log::toHexString(data) + " old: " + Log::toHexString(memory[addr]));
+    this->memory[addr] = data;
+}
