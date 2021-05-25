@@ -1,6 +1,6 @@
 #include "memoryManager.h"
 
-#ifdef WIN32
+#ifndef __UINT16_MAX__
 #define __UINT16_MAX__ UINT16_MAX
 #endif
 
