@@ -7,9 +7,7 @@ class Z80;
 #include <stdint.h>
 #include <iostream>
 
-class IManager;
-class MemoryManager;
-
+#include "cpu/iomanager/iomanager.h"
 #include "memoryManager/memoryManager.h"
 #include "iManager/iManager.h"
 #include "log/log.h"
@@ -20,8 +18,9 @@ public:
     Z80();
     ~Z80();
 
-    MemoryManager* mM;
-    IManager* iManager;
+    IOManager*              ioManager;
+    MemoryManager*          mM;
+    IManager*               iManager;
 
     //Get the contents of registers
     uint8_t A(){return this->rA;}

@@ -3,6 +3,7 @@
 Z80::Z80(){
     FUN();
 
+    this->ioManager = new IOManager();
     this->mM = new MemoryManager();
     this->iManager = new IManager(this);
 
@@ -12,6 +13,7 @@ Z80::Z80(){
 Z80::~Z80(){
     FUN();
 
+    delete this->ioManager;
     delete this->mM;
     delete this->iManager;
 }
