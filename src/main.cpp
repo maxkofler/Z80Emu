@@ -7,7 +7,7 @@
 Log* hlog;
 
 int main(int argc, char** argv){
-    hlog = new Log(Log::IO, false);
+    hlog = new Log(Log::F, false);
     using namespace std;
     
     Z80 z80;

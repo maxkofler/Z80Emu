@@ -11,7 +11,7 @@ uint8_t IOManager::in(uint8_t addr){
     uint8_t buf = this->read(addr);
 
     this->z80->ZF(buf == 0);
-    this->z80->SF((buf << 7) & 1);
+    this->z80->SF(buf >> 7);
 
     return buf;
 }
