@@ -13,3 +13,10 @@ bool IOManager::write(uint8_t addr, uint8_t data){
     }
     return true;
 }
+
+void IOManager::userWrite(uint8_t addr, uint8_t data){
+    FUN();
+
+    LOGIO("PORT (user) [" + Log::toHexString(addr) + "] < " + Log::toHexString(data));
+    this->_port[addr] = data;
+}

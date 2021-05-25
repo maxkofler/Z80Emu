@@ -7,7 +7,7 @@
 Log* hlog;
 
 int main(int argc, char** argv){
-    hlog = new Log(Log::FUNCALLS, false);
+    hlog = new Log(Log::IO, false);
     using namespace std;
     
     Z80 z80;
@@ -51,14 +51,39 @@ int main(int argc, char** argv){
             
 
         }else if (command == "pc"){
-            cout << "PC(hex)=";
+            cout << "PC(hex)= ";
             cin >> command;
             z80.PC(stoul(command, nullptr, 16));
             z80.HALT(false);
             cout << "new PC = " << Log::toHexString(z80.PC()) << endl;
         }
         
-        
+        else if (command == "ioconf"){
+            cout << "port(hex)= ";
+            cin >> command;
+            uint8_t port = stoul(command, nullptr, 16);
+            cout << "mode(hex 0=IN, 1=OUT)= ";
+            cin >> command;
+            uint8_t mode = stoul(command, nullptr, 16);
+            z80.ioManager->config(port, mode);
+        }
+
+        else if (command == "iopoke"){
+            cout << "port(hex)= ";
+            cin >> command;
+            uint8_t port = stoul(command, nullptr, 16);
+            cout << "data(hex)= ";
+            cin >> command;
+            uint8_t data = stoul(command, nullptr, 16);
+            z80.ioManager->userWrite(port, data);
+        }
+
+        else if (command == "iopeek"){
+            cout << "port(hex)= ";
+            cin >> command;
+            uint8_t port = stoul(command, nullptr, 16);
+            z80.ioManager->read(port);
+        }
         
         else if (command == "exit" || command == "q"){
             run = false;

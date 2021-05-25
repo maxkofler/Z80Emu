@@ -35,6 +35,13 @@ public:
     bool                        write(uint8_t addr, uint8_t data);
 
     /**
+     *  Write to a port, ovverides the mode!
+     *  @arg    addr            The address to write to
+     *  @arg    data            The byte to write to this address
+     **/
+    void                        userWrite(uint8_t addr, uint8_t data);
+
+    /**
      *  Read from a port, does not have any errors, the CPU can read anywhere
      *  @arg    addr            The address to read from
      *  @return                 The byte read from the port
