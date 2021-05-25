@@ -18,6 +18,7 @@ class MainIS;
 class MainIS{
 public:
     MainIS(Z80*);
+    ~MainIS();
 
     //Fetches the operands for the provided instruction
     void                        fetch(Instruction& instruction);

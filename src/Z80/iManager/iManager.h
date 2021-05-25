@@ -16,6 +16,7 @@ class IManager{
 
 public:
     IManager(Z80*);
+    ~IManager();
 
     Instruction                     fetchIS();
     void                            execIS(Instruction is);

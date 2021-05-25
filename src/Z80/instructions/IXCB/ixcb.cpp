@@ -9,5 +9,7 @@ IXCB::IXCB(Z80* z80){
 }
 
 IXCB::~IXCB(){
+    FUN();
+    
     delete[] this->_opCycles;
 }

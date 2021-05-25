@@ -9,5 +9,7 @@ IYCB::IYCB(Z80* z80){
 }
 
 IYCB::~IYCB(){
+    FUN();
+    
     delete[] this->_opCycles;
 }

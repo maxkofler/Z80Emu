@@ -12,3 +12,15 @@ MainIS::MainIS(Z80* z80){
 
     this->p_fillArrays();
 }
+
+MainIS::~MainIS(){
+    FUN();
+
+    delete this->idas;
+    delete this->rot;
+    delete this->arit;
+    delete this->cpctl;
+
+    delete[] this->_opBytes;
+    delete[] this->_opCycles;
+}

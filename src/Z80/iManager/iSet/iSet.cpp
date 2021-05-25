@@ -5,17 +5,34 @@ ISet::ISet(Z80* z80){
     this->z80 = z80;
     this->mainIS = new MainIS(this->z80);
     this->bitIS = new BitIS(this->z80);
+    this->extIS = new ExtIS(this->z80);
+}
+
+ISet::~ISet(){
+    FUN();
+
+    delete this->mainIS;
+    delete this->bitIS;
+    delete this->extIS;
 }
 
 void ISet::execIS(Instruction is){
     FUN();
 
-    if (is[0] == 0xCB){
-        LOGD("Executing instruction from Bit instruction set");
-        this->bitIS->exec(is);
-    }
-    else{
-        LOGD("Executing instruction from Main instruction set");
-        this->mainIS->exec(is);
+    switch(is[0]){
+        case 0xcb:
+            LOGD("Executing using BIT instruction set");
+            this->bitIS->exec(is);
+            break;
+
+        case 0xed:
+            LOGD("Executing using EXT instruction set");
+            this->extIS->exec(is);
+            break;
+
+        default:
+            LOGD("Executing using MAIN instruction set");
+            this->mainIS->exec(is);
+            break;
     }
 }

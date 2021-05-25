@@ -7,8 +7,10 @@ class ISet;
 #include "../../log/log.h"
 
 #include "../../cpu/instruction/instruction.h"
+
 #include "../../instructions/MAINIS/mainIs.h"
 #include "../../instructions/BIT/bitIS.h"
+#include "../../instructions/EXT/extIS.h"
 
 #include <stdint.h>
 
@@ -16,6 +18,7 @@ class ISet{
 
 public:
     ISet(Z80*);
+    ~ISet();
 
     //New function to fetch all the instruction data from memory
     Instruction             fetchInstruction(uint8_t opcode);
@@ -26,8 +29,9 @@ public:
 private:
     Z80* z80;
 
-    MainIS* mainIS;
-    BitIS* bitIS;
+    MainIS*                 mainIS;
+    BitIS*                  bitIS;
+    ExtIS*                  extIS;
 
     uint8_t *opBytes;
 };

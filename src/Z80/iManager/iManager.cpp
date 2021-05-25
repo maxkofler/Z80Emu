@@ -6,6 +6,12 @@ IManager::IManager(Z80* z80){
     this->iSet = new ISet(this->z80);
 }
 
+IManager::~IManager(){
+    FUN();
+
+    delete this->iSet;
+}
+
 Instruction IManager::fetchIS(){
     FUN();
     if (this->ISLoaded){
