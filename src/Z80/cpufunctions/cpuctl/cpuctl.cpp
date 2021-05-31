@@ -1,4 +1,4 @@
-#include "cpuctl.h"
+#include "cpufunctions/cpuctl.h"
 
 CPUctl::CPUctl(Z80* z80){
     FUN();

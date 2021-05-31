@@ -1,4 +1,4 @@
-#include "mainIs.h"
+#include "instructions/mainIs.h"
 
 void MainIS::exec(Instruction is){
     FUN();

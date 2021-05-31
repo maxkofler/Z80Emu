@@ -40,7 +40,7 @@
 #ifndef __MEMORYMANAGER_H__
 #define __MEMORYMANAGER_H__
 
-#include "../log/log.h"
+#include "log.h"
 
 #include <string>
 #include <fstream>

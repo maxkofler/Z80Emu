@@ -1,4 +1,4 @@
-#include "iycb.h"
+#include "instructions/iycb.h"
 
 IYCB::IYCB(Z80* z80){
     FUN();

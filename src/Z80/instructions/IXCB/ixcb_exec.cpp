@@ -1,4 +1,4 @@
-#include "ixcb.h"
+#include "instructions/ixcb.h"
 
 void IXCB::exec(Instruction is){
     FUN();

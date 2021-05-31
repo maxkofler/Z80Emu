@@ -3,14 +3,14 @@
 
 class ISet;
 
-#include "../../z80.h"
-#include "../../log/log.h"
+#include "z80.h"
+#include "log.h"
 
-#include "../../cpu/instruction/instruction.h"
+#include "instruction.h"
 
-#include "../../instructions/MAINIS/mainIs.h"
-#include "../../instructions/BIT/bitIS.h"
-#include "../../instructions/EXT/extIS.h"
+#include "instructions/mainIs.h"
+#include "instructions/bitIS.h"
+#include "instructions/extIS.h"
 
 #include <stdint.h>
 

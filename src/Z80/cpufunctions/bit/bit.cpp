@@ -1,4 +1,4 @@
-#include "bit.h"
+#include "cpufunctions/bit.h"
 
 Bit::Bit(Z80* z80){
     this->z80 = z80;

@@ -1,6 +1,6 @@
-#include "extIS.h"
+#include "instructions/extIS.h"
 
-#include "../../cpufunctions/incdecaddsub/incdecaddsub.h"
+#include "cpufunctions/incdecaddsub.h"
 
 void ExtIS::exec(Instruction is){
     FUN();

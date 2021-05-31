@@ -1,4 +1,4 @@
-#include "extIS.h"
+#include "instructions/extIS.h"
 
 ExtIS::ExtIS(Z80* z80){
     FUN();

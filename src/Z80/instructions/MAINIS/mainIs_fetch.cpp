@@ -1,4 +1,4 @@
-#include "mainIs.h"
+#include "instructions/mainIs.h"
 
 void MainIS::fetch(Instruction& instruction){
     FUN();

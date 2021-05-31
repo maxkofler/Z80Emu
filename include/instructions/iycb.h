@@ -3,12 +3,12 @@
 
 class IYCB;
 
-#include "../../log/log.h"
-#include "../../z80.h"
+#include "log.h"
+#include "z80.h"
 
-#include "../../cpu/instruction/instruction.h"
-#include "../../cpufunctions/rotate/rotate.h"
-#include "../../cpufunctions/bit/bit.h"
+#include "instruction.h"
+#include "cpufunctions/rotate.h"
+#include "cpufunctions/bit.h"
 
 class IYCB{
 

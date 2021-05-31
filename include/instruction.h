@@ -3,7 +3,7 @@
 
 class Instruction;
 
-#include "../../log/log.h"
+#include "log.h"
 
 #include <vector>
 

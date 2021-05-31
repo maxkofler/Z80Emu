@@ -3,9 +3,9 @@
 
 class ExtIS;
 
-#include "../../log/log.h"
-#include "../../z80.h"
-#include "../../cpu/instruction/instruction.h"
+#include "log.h"
+#include "z80.h"
+#include "instruction.h"
 
 class ExtIS{
 

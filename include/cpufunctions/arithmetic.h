@@ -2,8 +2,8 @@
 #define __ARITHMETIC_H__
 
 class Arithmetic;
-#include "../../z80.h"
-#include "../incdecaddsub/incdecaddsub.h"
+#include "z80.h"
+#include "cpufunctions/incdecaddsub.h"
 #include <stdint.h>
 
 class Arithmetic{

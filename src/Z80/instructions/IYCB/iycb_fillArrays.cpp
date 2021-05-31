@@ -1,4 +1,4 @@
-#include "iycb.h"
+#include "instructions/iycb.h"
 
 void IYCB::p_fillArrays(){
     FUN();

@@ -1,4 +1,4 @@
-#include "incdecaddsub.h"
+#include "cpufunctions/incdecaddsub.h"
 
 uint8_t IncDecAddSub::inc(uint8_t reg){
     //Affected:     N, P/V(overflow), H, Z, S

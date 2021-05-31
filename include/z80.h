@@ -7,10 +7,10 @@ class Z80;
 #include <stdint.h>
 #include <iostream>
 
-#include "cpu/iomanager/iomanager.h"
-#include "memoryManager/memoryManager.h"
-#include "iManager/iManager.h"
-#include "log/log.h"
+#include "iomanager.h"
+#include "memoryManager.h"
+#include "iManager.h"
+#include "log.h"
 
 class Z80{
     

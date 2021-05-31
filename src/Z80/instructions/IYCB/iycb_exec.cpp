@@ -1,4 +1,4 @@
-#include "iycb.h"
+#include "instructions/iycb.h"
 
 void IYCB::exec(Instruction is){
     uint8_t op = is[0];

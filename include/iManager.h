@@ -7,10 +7,10 @@
 class IManager;
 class Z80;
 
-#include "../cpu/instruction/instruction.h"
-#include "iSet/iSet.h"
-#include "../z80.h"
-#include "../log/log.h"
+#include "instruction.h"
+#include "iSet.h"
+#include "z80.h"
+#include "log.h"
 
 class IManager{
 

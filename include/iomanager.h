@@ -3,8 +3,8 @@
 
 class IOManager;
 
-#include "../../log/log.h"
-#include "../../z80.h"
+#include "log.h"
+#include "z80.h"
 
 class IOManager{
 public:

@@ -1,5 +1,5 @@
-#include "Z80/z80.h"
-#include "Z80/log/log.h"
+#include "z80.h"
+#include "log.h"
 
 #include <iostream>
 #include <string>

@@ -1,4 +1,4 @@
-#include "extIS.h"
+#include "instructions/extIS.h"
 
 void ExtIS::fetch(Instruction& is){
     FUN();

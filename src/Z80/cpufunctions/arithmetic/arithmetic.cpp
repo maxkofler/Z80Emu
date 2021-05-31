@@ -1,4 +1,4 @@
-#include "arithmetic.h"
+#include "cpufunctions/arithmetic.h"
 
 Arithmetic::Arithmetic(Z80* z80){
     this->z80 = z80;

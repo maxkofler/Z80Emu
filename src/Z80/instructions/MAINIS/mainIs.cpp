@@ -1,4 +1,4 @@
-#include "mainIs.h"
+#include "instructions/mainIs.h"
 
 MainIS::MainIS(Z80* z80){
     FUN();

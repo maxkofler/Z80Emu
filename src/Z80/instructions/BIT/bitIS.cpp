@@ -1,4 +1,4 @@
-#include "bitIS.h"
+#include "instructions/bitIS.h"
 
 BitIS::BitIS(Z80* z80){
     FUN();

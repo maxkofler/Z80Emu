@@ -1,4 +1,4 @@
-#include "iycb.h"
+#include "instructions/iycb.h"
 
 void IYCB::fetch(Instruction& is){
     FUN();

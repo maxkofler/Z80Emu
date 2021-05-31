@@ -1,4 +1,4 @@
-#include "rotate.h"
+#include "cpufunctions/rotate.h"
 
 Rotate::Rotate(Z80* z80){
     this->z80 = z80;

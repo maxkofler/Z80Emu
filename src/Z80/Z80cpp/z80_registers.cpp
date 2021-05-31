@@ -1,4 +1,4 @@
-#include "../z80.h"
+#include "z80.h"
 
 void Z80::BC(uint16_t v){
     FUN();

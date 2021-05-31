@@ -1,4 +1,4 @@
-#include "bitIS.h"
+#include "instructions/bitIS.h"
 
 void BitIS::fetch(Instruction& is){
     FUN();

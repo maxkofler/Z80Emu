@@ -1,4 +1,4 @@
-#include "ixcb.h"
+#include "instructions/ixcb.h"
 
 IXCB::IXCB(Z80* z80){
     FUN();

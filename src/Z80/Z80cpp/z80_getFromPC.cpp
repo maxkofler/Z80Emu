@@ -1,4 +1,4 @@
-#include "../z80.h"
+#include "z80.h"
 
 uint8_t Z80::readFromPC(){
     FUN();
