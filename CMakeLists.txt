@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.5)
 project (Z80Emu)
 
-add_subdirectory(libz80)
+add_subdirectory(libz80emu)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
@@ -11,5 +11,5 @@ set (source_dir "${PROJECT_SOURCE_DIR}/src/")
 file (GLOB_RECURSE sourcefiles "${source_dir}/*.cpp")
 
 add_executable (Z80Emu ${sourcefiles})
-target_link_libraries(Z80Emu libz80)
-add_dependencies(Z80Emu libz80)
+target_link_libraries(Z80Emu libz80emu)
+add_dependencies(Z80Emu libz80emu)
