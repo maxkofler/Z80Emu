@@ -3,7 +3,7 @@
 
 class ISet;
 
-#include "z80.h"
+#include "z80emu.h"
 #include "log.h"
 
 #include "instruction.h"

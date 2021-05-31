@@ -3,7 +3,7 @@
 
 class Bit;
 
-#include "z80.h"
+#include "z80emu.h"
 
 class Bit{
 

@@ -4,7 +4,7 @@
 class CPUctl;
 
 #include "log.h"
-#include "z80.h"
+#include "z80emu.h"
 
 class CPUctl{
 public:

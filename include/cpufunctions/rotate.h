@@ -3,7 +3,7 @@
 
 class Rotate;
 
-#include "z80.h"
+#include "z80emu.h"
 
 class Rotate{
 public:

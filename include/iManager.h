@@ -9,7 +9,7 @@ class Z80;
 
 #include "instruction.h"
 #include "iSet.h"
-#include "z80.h"
+#include "z80emu.h"
 #include "log.h"
 
 class IManager{

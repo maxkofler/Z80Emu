@@ -4,7 +4,7 @@
 class IYCB;
 
 #include "log.h"
-#include "z80.h"
+#include "z80emu.h"
 
 #include "instruction.h"
 #include "cpufunctions/rotate.h"

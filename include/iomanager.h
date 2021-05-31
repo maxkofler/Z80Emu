@@ -4,7 +4,7 @@
 class IOManager;
 
 #include "log.h"
-#include "z80.h"
+#include "z80emu.h"
 
 class IOManager{
 public:
