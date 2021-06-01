@@ -5,7 +5,7 @@ class ExtIS;
 
 #include "log.h"
 #include "z80emu.h"
-#include "instruction.h"
+#include "z80emuinstruction.h"
 
 class ExtIS{
 
@@ -13,9 +13,9 @@ public:
     ExtIS(Z80*);
     ~ExtIS();
 
-    void                            fetch(Instruction&);
+    void                            fetch(Z80EmuInstrucion&);
 
-    void                            exec(Instruction);
+    void                            exec(Z80EmuInstrucion);
 
 private:
     Z80*                            z;

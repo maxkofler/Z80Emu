@@ -6,7 +6,7 @@ class IXCB;
 #include "log.h"
 #include "z80emu.h"
 
-#include "instruction.h"
+#include "z80emuinstruction.h"
 #include "cpufunctions/rotate.h"
 #include "cpufunctions/bit.h"
 
@@ -16,9 +16,9 @@ public:
     IXCB(Z80* z80);
     ~IXCB();
 
-    void                        fetch(Instruction&);
+    void                        fetch(Z80EmuInstrucion&);
 
-    void                        exec(Instruction);          //These instructions don't have any operands!
+    void                        exec(Z80EmuInstrucion);          //These instructions don't have any operands!
 
 private:
     Z80* z;

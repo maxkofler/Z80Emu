@@ -1,8 +1,8 @@
-#include "instruction.h"
+#include "z80emuinstruction.h"
 
 #include <exception>
 
-uint8_t &Instruction::operator[](size_t index){
+uint8_t &Z80EmuInstrucion::operator[](size_t index){
     if (index < this->_instruction.size())
         return this->_instruction.at(index);
     else{
@@ -11,12 +11,12 @@ uint8_t &Instruction::operator[](size_t index){
     }
 }
 
-void Instruction::addByte(uint8_t byte){
+void Z80EmuInstrucion::addByte(uint8_t byte){
     FUN();
 
     this->_instruction.push_back(byte);
 }
 
-uint8_t Instruction::getLastByte(){
+uint8_t Z80EmuInstrucion::getLastByte(){
     return this->_instruction.at(this->_instruction.size()-1);
 }

@@ -16,7 +16,7 @@ ISet::~ISet(){
     delete this->extIS;
 }
 
-void ISet::execIS(Instruction is){
+void ISet::execIS(Z80EmuInstrucion is){
     FUN();
 
     switch(is[0]){

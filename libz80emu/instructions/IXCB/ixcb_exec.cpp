@@ -1,6 +1,6 @@
 #include "instructions/ixcb.h"
 
-void IXCB::exec(Instruction is){
+void IXCB::exec(Z80EmuInstrucion is){
     FUN();
 
     uint8_t op = is[0];

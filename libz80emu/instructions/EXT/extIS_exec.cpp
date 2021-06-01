@@ -2,7 +2,7 @@
 
 #include "cpufunctions/incdecaddsub.h"
 
-void ExtIS::exec(Instruction is){
+void ExtIS::exec(Z80EmuInstrucion is){
     FUN();
 
     IncDecAddSub idas(this->z);

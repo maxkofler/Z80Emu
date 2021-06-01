@@ -1,6 +1,6 @@
 #include "instructions/bitIS.h"
 
-void BitIS::fetch(Instruction& is){
+void BitIS::fetch(Z80EmuInstrucion& is){
     FUN();
 
     is.setCycles(this->_opCycles[is[0]]);

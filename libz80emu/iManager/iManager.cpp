@@ -12,7 +12,7 @@ IManager::~IManager(){
     delete this->iSet;
 }
 
-Instruction IManager::fetchIS(){
+Z80EmuInstrucion IManager::fetchIS(){
     FUN();
     if (this->ISLoaded){
         LOGW("finalizeIS() was not called! Please call to clean up pointers!");
@@ -21,18 +21,18 @@ Instruction IManager::fetchIS(){
     //Read the opcode
     this->opcode = this->z80->readFromPCInc();
 
-    Instruction curInstruction = this->iSet->fetchInstruction(this->opcode);
+    Z80EmuInstrucion curZ80EmuInstrucion = this->iSet->fetchZ80EmuInstrucion(this->opcode);
 
-    return curInstruction;
+    return curZ80EmuInstrucion;
 }
 
-void IManager::execIS(Instruction is){
+void IManager::execIS(Z80EmuInstrucion is){
     FUN();
     this->iSet->execIS(is);
     this->z80->addCycles(is.getCycles());
 }
 
-void IManager::logIS(Instruction is){
+void IManager::logIS(Z80EmuInstrucion is){
     FUN();
     uint8_t opcode = is[0];
     std::string instruction = "(" + Log::toHexString(opcode) + ")";
@@ -42,7 +42,7 @@ void IManager::logIS(Instruction is){
     LOGD("Current instruction: " + instruction);
 }
 
-void IManager::finalizeIS(Instruction is){
+void IManager::finalizeIS(Z80EmuInstrucion is){
     FUN();
     this->ISLoaded = false;
 }

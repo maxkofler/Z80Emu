@@ -6,7 +6,7 @@ class ISet;
 #include "z80emu.h"
 #include "log.h"
 
-#include "instruction.h"
+#include "z80emuinstruction.h"
 
 #include "instructions/mainIs.h"
 #include "instructions/bitIS.h"
@@ -21,10 +21,10 @@ public:
     ~ISet();
 
     //New function to fetch all the instruction data from memory
-    Instruction             fetchInstruction(uint8_t opcode);
+    Z80EmuInstrucion             fetchZ80EmuInstrucion(uint8_t opcode);
 
     //Execute the instruction specified
-    void                    execIS(Instruction is);
+    void                    execIS(Z80EmuInstrucion is);
 
 private:
     Z80* z80;

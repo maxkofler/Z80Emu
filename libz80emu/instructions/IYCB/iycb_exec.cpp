@@ -1,6 +1,6 @@
 #include "instructions/iycb.h"
 
-void IYCB::exec(Instruction is){
+void IYCB::exec(Z80EmuInstrucion is){
     uint8_t op = is[0];
     uint8_t o = is[1];
     uint16_t x = z->IY() + o;

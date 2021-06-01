@@ -7,7 +7,7 @@
 class IManager;
 class Z80;
 
-#include "instruction.h"
+#include "z80emuinstruction.h"
 #include "iSet.h"
 #include "z80emu.h"
 #include "log.h"
@@ -18,11 +18,11 @@ public:
     IManager(Z80*);
     ~IManager();
 
-    Instruction                     fetchIS();
-    void                            execIS(Instruction is);
-    void                            finalizeIS(Instruction is);
+    Z80EmuInstrucion                     fetchIS();
+    void                            execIS(Z80EmuInstrucion is);
+    void                            finalizeIS(Z80EmuInstrucion is);
 
-    void                            logIS(Instruction is);
+    void                            logIS(Z80EmuInstrucion is);
 
 private:
     bool ISLoaded;

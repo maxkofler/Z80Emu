@@ -6,7 +6,7 @@ class MainIS;
 #include "z80emu.h"
 #include "log.h"
 
-#include "instruction.h"
+#include "z80emuinstruction.h"
 
 #include "cpufunctions/rotate.h"
 #include "cpufunctions/arithmetic.h"
@@ -21,10 +21,10 @@ public:
     ~MainIS();
 
     //Fetches the operands for the provided instruction
-    void                        fetch(Instruction& instruction);
+    void                        fetch(Z80EmuInstrucion& instruction);
 
     //Executes the provided instruction
-    void                        exec(Instruction is);
+    void                        exec(Z80EmuInstrucion is);
 
 private:
     IncDecAddSub* idas;

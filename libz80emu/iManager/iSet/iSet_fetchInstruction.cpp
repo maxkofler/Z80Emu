@@ -1,27 +1,27 @@
 #include "iSet.h"
 
-Instruction ISet::fetchInstruction(uint8_t opcode){
+Z80EmuInstrucion ISet::fetchZ80EmuInstrucion(uint8_t opcode){
     FUN();
 
-    Instruction newInstruction;
-    newInstruction.addByte(opcode);
+    Z80EmuInstrucion newZ80EmuInstrucion;
+    newZ80EmuInstrucion.addByte(opcode);
 
     switch(opcode){
         case 0xcb:
             LOGI("Fetching using BIT instruction set");
-            this->bitIS->fetch(newInstruction);
+            this->bitIS->fetch(newZ80EmuInstrucion);
             break;
 
         case 0xed:
             LOGI("Fetching using EXT instruction set");
-            this->extIS->fetch(newInstruction);
+            this->extIS->fetch(newZ80EmuInstrucion);
             break;
 
         default:
             LOGI("Fetching using MAIN instruction set");
-            this->mainIS->fetch(newInstruction);
+            this->mainIS->fetch(newZ80EmuInstrucion);
             break;
     }
 
-    return newInstruction;
+    return newZ80EmuInstrucion;
 }

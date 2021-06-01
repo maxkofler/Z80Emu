@@ -1,6 +1,6 @@
 #include "instructions/ixcb.h"
 
-void IXCB::fetch(Instruction& is){
+void IXCB::fetch(Z80EmuInstrucion& is){
     FUN();
 
     is.setCycles(this->_opCycles[is.getLastByte()]);

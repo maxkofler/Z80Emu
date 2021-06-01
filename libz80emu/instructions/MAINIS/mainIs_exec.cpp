@@ -1,6 +1,6 @@
 #include "instructions/mainIs.h"
 
-void MainIS::exec(Instruction is){
+void MainIS::exec(Z80EmuInstrucion is){
     FUN();
 
     uint8_t op = is[0];

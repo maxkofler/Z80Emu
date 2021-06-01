@@ -25,7 +25,7 @@ void MainIS::p_fillArrays(){
         0,  0,  2,  0,  2,  0,  1,  0,  0,  0,  2,  0,  2,  0,  1,  0      //0xF0
     };
 
-    //  Instructions marked with [opcode] will add their own
+    //  Z80EmuInstrucions marked with [opcode] will add their own
     //  cycles to the cpu, because their cycles are action-dependent
     //  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  A,  B,  C,  D,  E,  F
     this->_opCycles = new uint8_t[256]{

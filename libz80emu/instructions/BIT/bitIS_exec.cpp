@@ -1,6 +1,6 @@
 #include "instructions/bitIS.h"
 
-void BitIS::exec(Instruction op){
+void BitIS::exec(Z80EmuInstrucion op){
     FUN();
 
     //Just switch the opcode, in this instruction set are no operands needed
