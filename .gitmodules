@@ -1,0 +1,3 @@
+[submodule "libz80emu/Log"]
+	path = libz80emu/Log
+	url = https://github.com/maxkofler/Log

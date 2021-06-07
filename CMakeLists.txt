@@ -1,9 +1,9 @@
 cmake_minimum_required (VERSION 3.5)
 project (Z80Emu)
 
-add_subdirectory(libz80emu)
+include_directories(include libz80emu/Log/include)
 
-include_directories(${PROJECT_SOURCE_DIR}/include)
+add_subdirectory(libz80emu)
 
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -static")
 set (source_dir "${PROJECT_SOURCE_DIR}/src/")
