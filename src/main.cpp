@@ -14,10 +14,10 @@ int main(int argc, char** argv){
 
     if (argc == 2){
         cout << "Loading program from \"" << argv[1] << "\"" << endl;
-        z80.mM->loadProgFromFile(argv[1], 0x1000);
+        z80.mM->loadProgFromFile(argv[1], 0x0000);
     }else{
         cout << "Loading program from default \"prog.hex\"" << endl;
-        if (z80.mM->loadProgFromFile("prog.hex", 0x1000) == 0){
+        if (z80.mM->loadProgFromFile("prog.hex", 0x0000) == 0){
             cout << "Error in loading program!" << endl;
             return 0;
         }
